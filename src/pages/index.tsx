@@ -5,8 +5,8 @@ import Main from "@src/components/templates/Main";
 export default function Index() {
   return (
     <Main>
-      <div>
-        
+      <div className={styles.container}>
+
       </div>
     </Main>
   );
