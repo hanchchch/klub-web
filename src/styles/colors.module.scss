@@ -1,0 +1,30 @@
+$main-background: #f2f2f2f2;
+$mint: #adddce;
+$green: #70ae98;
+$yellow: #e6b655;
+$orange: #f0a35e;
+$pastel-red: #ca7e8d;
+$google: #4285f4;
+$white: #ffffff;
+$white-grey: #fcfcfc;
+$light-grey: #cccccc;
+$grey: #888888;
+$black: #000000;
+$corca-blue: #036eb7;
+$corca-black: #211613;
+
+:export {
+  mint: $mint;
+  green: $green;
+  yellow: $yellow;
+  orange: $orange;
+  pastelRed: $pastel-red;
+  google: $google;
+  white: $white;
+  whiteGrey: $white-grey;
+  lightGrey: $light-grey;
+  grey: $grey;
+  black: $black;
+  corcaBlue: $corca-blue;
+  corcaBlack: $corca-black;
+}

@@ -1,0 +1,21 @@
+@import "./colors.module.scss";
+
+.weightNormal {
+  font-weight: 300;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.blue {
+  color: $corca-blue;
+}
+
+.white {
+  color: $white;
+}
+
+.grey {
+  color: $light-grey;
+}
