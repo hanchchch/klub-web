@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.scss";
 
+
 export interface MainTemplateProps {
   children: React.ReactNode;
 }
@@ -8,7 +9,12 @@ export interface MainTemplateProps {
 export default function MainTemplate(props: MainTemplateProps) {
   return (
     <>
-      <div className={styles.root}>{props.children}</div>
+      <head>
+        <title>KLUB</title>
+      </head>
+      <div className={styles.root}>
+        {props.children}
+      </div>
     </>
   );
 }

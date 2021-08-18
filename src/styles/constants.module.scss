@@ -2,8 +2,11 @@ $breakpoint-mobile: 335px;
 $breakpoint-tablet: 758px;
 $breakpoint-desktop: 1024px;
 
+$header-height: 40vh;
+
 :export {
   breakpointMobile: $breakpoint-mobile;
   breakpointTablet: $breakpoint-tablet;
   breakpointDesktop: $breakpoint-desktop;
+  headerHeight: $header-height;
 }
