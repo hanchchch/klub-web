@@ -1,0 +1,53 @@
+@import "@styles/colors.module.scss";
+@import "@styles/constants.module.scss";
+@import "@styles/mixins.scss";
+
+.header {
+  position: fixed;
+  width: 100vw;
+  background-color: $theme-main;
+
+  .logo {
+    height: $header-height;
+    display: flex;
+    align-items: center;
+    embed {
+      margin: 8px;
+      height: 80%;
+    }
+  }
+}
+
+.container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: $header-height;
+}
+
+.title {
+  font-size: 2em;
+  margin: 12px 0;
+}
+
+.image {
+  width: 80vw;
+  height: 40vh;
+  margin: 24px 0;
+  border: 1px solid black;
+
+  .description {
+    font-family: 'gopher';
+  }
+}
+
+
+.ordernow {
+  width: 256px;
+  height: 46px;
+  font-size: 2em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+}

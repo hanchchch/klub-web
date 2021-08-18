@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./index.module.scss";
 import Main from "@src/components/templates/Main";
-import Card from "@src/components/atoms/Card";
+import ProductCard from "@src/components/molecules/ProductCard";
+import { products } from "@src/utils/store";
 
 export default function Index() {
   const [show, setShow] = useState<"set" | "all">("set");
@@ -14,13 +15,13 @@ export default function Index() {
         </div>
         <div className={styles.choice}>
           <div
-            className={show === "set" ? styles.active : ""}
+            className={show === "set" ? styles.active : styles.deactive}
             onClick={() => setShow("set")}
           >
             SET
           </div>
           <div
-            className={show === "all" ? styles.active : ""}
+            className={show === "all" ? styles.active : styles.deactive}
             onClick={() => setShow("all")}
           >
             ALL
@@ -28,14 +29,12 @@ export default function Index() {
         </div>
       </div>
       <div className={styles.container}>
-        <Card>
-        </Card>
-        <Card>
-        </Card>
-        <Card>
-        </Card>
-        <Card>
-        </Card>
+        {products.map(product => 
+          <ProductCard
+            key={product.id}
+            product={product}
+          />
+        )}
       </div>
     </Main>
   );
