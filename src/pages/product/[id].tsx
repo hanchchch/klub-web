@@ -11,6 +11,8 @@ export default function ProductDetail(props: { id: number }) {
   const [phone, setPhone] = useState<string>("");
   const [address, setAddress] = useState<string>("");
 
+  const [isShipping, setIsShipping] = useState<boolean>(false);
+
   return (
     <Main>
       <div className={styles.header}>
@@ -72,12 +74,14 @@ export default function ProductDetail(props: { id: number }) {
             label: "아니오",
             value: "false",
           }]}
+          onChange={(v) => setIsShipping(v === "true")}
+          value={`${isShipping}`}
         />
-        <TextInput
+        {isShipping && <TextInput
           label="Address / 주소"
           value={address}
           onChange={(v) => setAddress(v)}
-        />
+        />}
         <Dropdown
           label={"Donation / 기부처"}
           options={donation.map(donation => ({

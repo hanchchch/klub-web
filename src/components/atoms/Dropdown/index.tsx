@@ -8,10 +8,18 @@ interface DropdownProps {
     label: string;
     value: string | number;
   }[];
+  value?: string | number;
+  onChange?: (value: string | number) => void;
 }
 
 export default function Dropdown(props: DropdownProps) {
-  const { label = "", options } = props;
+  const { label = "", options, value, onChange } = props;
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (onChange) {
+      onChange(e.target.value);
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.head}>
@@ -19,7 +27,7 @@ export default function Dropdown(props: DropdownProps) {
         <BiDownArrow className={styles.arrow}/>
       </div>
       <div className={styles.container}>
-        <select>
+        <select onChange={handleChange} value={value}>
           {options.map(option => (
             <option key={option.label} value={option.value}>
               {option.label}
