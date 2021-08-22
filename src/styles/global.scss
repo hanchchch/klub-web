@@ -4,11 +4,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://use.typekit.net/yjq5bzg.css");
-
+    
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
+}
 
 html {
   @extend .weightNormal;
-  font-family: "soap", "gopher", "Roboto", sans-serif;
+  font-family: "soap", "gopher", "GmarketSansMedium", "Roboto", sans-serif;
   background-color: $main-background;
   font-size: 15px;
   font-size: 15px;
