@@ -45,16 +45,19 @@
 
 .ordernow {
   width: 260px;
-  height: 48px;
+  height: 100px;
   font-size: 2em;
   background-size: contain;
   background-repeat: no-repeat;
   text-align: center;
   color: $ivory;
-  margin: 12px 24px;
+  margin: 12px 24px 0 24px;
+
+  line-height: 75px;
 }
 
 .donation {
+  width: 70%;
   margin-top: 2px;
   font-size: 12px;
   font-family: "gopher", "GmarketSansMedium";

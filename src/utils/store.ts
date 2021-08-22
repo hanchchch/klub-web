@@ -81,5 +81,10 @@ export const optionValues: { [key: string]: string[] } = {
 };
 
 export const donation: string[] = [
-
+  "[코로나19] 고려대학교 안암병원",
+  "[아동] 아름다운안암지역아동센터",
+  "[노인] 보문요양원",
+  "[장애인] 성북장애인복지관",
+  "[환경] 녹색법률센터(성북구)",
+  "[학교] KU PRIDE CLUB",
 ];

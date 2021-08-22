@@ -32,7 +32,7 @@ export default function ProductDetail(props: { id: number }) {
         <div className={styles.description}>
           {product?.description}
         </div>
-        <div className={styles.ordernow} style={{ backgroundImage: "url('/assets/ellipse.svg')" }}>
+        <div className={styles.ordernow} style={{ backgroundImage: "url('/assets/ellipse_2.svg')" }}>
           ORDER NOW
         </div>
         {product.category.map(category => (
@@ -68,10 +68,10 @@ export default function ProductDetail(props: { id: number }) {
         <Dropdown
           label={"Shipping / 배송 여부"}
           options={[{
-            label: "예",
+            label: "배송",
             value: "true",
           }, {
-            label: "아니오",
+            label: "현장 결제",
             value: "false",
           }]}
           onChange={(v) => setIsShipping(v === "true")}
