@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./[id].module.scss";
 import Main from "@src/components/templates/Main";
 import { categoryOptions, products } from "@src/utils/store";
-import Option from "@src/components/atoms/Option";
+import Dropdown from "@src/components/atoms/Dropdown";
 
 export default function ProductDetail(props: { id: number }) {
   const product = products.filter(product => product.id == props.id)[0];
@@ -32,18 +32,18 @@ export default function ProductDetail(props: { id: number }) {
         {product.category.map(category => (
           <div key={category} className={styles.category}>
             {categoryOptions[category].map(option => (
-              <Option
+              <Dropdown
                 key={option}
                 label={"Size"}
                 options={[{
-                  choice: "M",
-                  value: 0,
+                  label: "M",
+                  value: "M",
                 }, {
-                  choice: "L",
-                  value: 0,
+                  label: "L",
+                  value: "L",
                 }, {
-                  choice: "XL",
-                  value: 0,
+                  label: "XL",
+                  value: "XL",
                 }]}
               />
             ))}
