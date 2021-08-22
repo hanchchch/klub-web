@@ -70,8 +70,14 @@ export const products: Product[] = [
 export const categoryOptions: { [key in ProductCategory]: string[] } = {
   shirt: ["size"],
   sticker: [],
-  tumbler: ["color"],
-  shirtSet: ["size", "color"],
+  tumbler: ["colorTumbler"],
+  shirtSet: ["size", "colorShirt"],
+};
+
+export const optionValues: { [key: string]: string[] } = {
+  size: ["M", "L", "XL"],
+  colorShirt: ["White", "Black"],
+  colorTumbler: ["Black", "Pink"],
 };
 
 export const donation: string[] = [
