@@ -68,16 +68,25 @@ export const products: Product[] = [
 ];
 
 export const categoryOptions: { [key in ProductCategory]: string[] } = {
-  shirt: ["size"],
+  shirt: ["shirtSize"],
   sticker: [],
-  tumbler: ["colorTumbler"],
-  shirtSet: ["size", "colorShirt"],
+  tumbler: ["tumblerColor"],
+  shirtSet: ["shirtSize", "shirtColor"],
 };
 
-export const optionValues: { [key: string]: string[] } = {
-  size: ["M", "L", "XL"],
-  colorShirt: ["White", "Black"],
-  colorTumbler: ["Black", "Pink"],
+export const options: { [key: string]: { label: string, values: string[] } } = {
+  shirtSize: {
+    label: "T-Shirt Size / 티셔츠 사이즈",
+    values: ["M", "L", "XL"],
+  },
+  shirtColor: {
+    label: "T-Shirt Color / 티셔츠 색상",
+    values: ["White", "Black"],
+  },
+  tumblerColor: {
+    label: "Tumbler Color / 텀블러 색상",
+    values: ["Black", "Pink"],
+  },
 };
 
 export const donation: string[] = [
