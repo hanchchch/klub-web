@@ -29,12 +29,21 @@ export default function ProductDetail(props: { id: number }) {
   useEffect(() => {
     let blank = false;
     optionKeys.forEach(key => {
-      if (options[key] === "") {
-        blank = true;
-      }
+      if (options[key] === "") blank = true;
     });
     if (!blank) {
+      let isSameExists = false;
+      orders.forEach(order => {
+        let same = true;
+        optionKeys.forEach(key => {
+          if (order.options[key] !== options[key]) same = false;
+        });
+        if (same) isSameExists = true;
+      });
+
       setOptions(initialOptions);
+
+      if (isSameExists) return;
       setOrders([
         ...orders,
         { product, options, quantity: 1 },
