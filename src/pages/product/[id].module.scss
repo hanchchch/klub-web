@@ -35,43 +35,47 @@
   & > * {
     width: 70%;
   }
-}
 
-.title {
-  font-size: 2em;
-  margin: 12px 0;
-}
+  .title {
+    font-family: "soap";
+    font-size: 2em;
+    margin: 12px 0;
+  }
+  
+  .image {
+    width: 80vw;
+    height: 40vh;
+    margin: 24px 0;
+    border: 1px solid black;
+  }
+  
+  .description {
+    font-family: "gopher";
+  }
+  
+  .ordernow {
+    font-family: "soap";
+    width: 260px;
+    height: 100px;
+    font-size: 2em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-align: center;
+    color: $ivory;
+    margin: 12px 24px 0 24px;
+  
+    line-height: 75px;
+  }
 
-.image {
-  width: 80vw;
-  height: 40vh;
-  margin: 24px 0;
-  border: 1px solid black;
-}
-
-.description {
-  font-family: "gopher";
-}
-
-.ordernow {
-  width: 260px;
-  height: 100px;
-  font-size: 2em;
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-align: center;
-  color: $ivory;
-  margin: 12px 24px 0 24px;
-
-  line-height: 75px;
-}
-
-.donation {
-  margin-top: 2px;
-  font-size: 12px;
-}
-
-.order {
-  display: flex;
-  justify-content: space-between;
+  .donation {
+    margin-top: 2px;
+    font-size: 12px;
+  }
+  
+  .order {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+  }
 }

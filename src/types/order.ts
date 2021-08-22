@@ -11,4 +11,5 @@ export interface Orderer {
 export interface Order {
   product: Product;
   options: { [key: string]: string };
+  quantity: number;
 }
