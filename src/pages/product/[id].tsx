@@ -6,6 +6,7 @@ import Dropdown from "@src/components/atoms/Dropdown";
 import TextInput from "@src/components/atoms/TextInput";
 import useOrders from "@src/utils/hooks/order";
 import NumberInput from "@src/components/atoms/NumberInput";
+import { BiX } from "react-icons/bi";
 
 export default function ProductDetail(props: { id: number }) {
   const product = products.filter(product => product.id == props.id)[0];
@@ -83,15 +84,22 @@ export default function ProductDetail(props: { id: number }) {
         {orders.map((order, index) => (
           <div className={styles.order} key={index}>
             <div>{optionKeys.map(key => order.options[key]).join(" / ")}</div>
-            <NumberInput
-              value={order.quantity}
-              onChange={v => {
-                if (v < 1) return;
+            <div className={styles.control}>
+              <NumberInput
+                value={order.quantity}
+                onChange={v => {
+                  if (v < 1) return;
+                  const oldOrders = orders;
+                  oldOrders[index].quantity = v;
+                  setOrders(oldOrders);
+                }}
+              />
+              <BiX className={styles.cancel} onClick={() => {
                 const oldOrders = orders;
-                oldOrders[index].quantity = v;
+                oldOrders.splice(index, 1);
                 setOrders(oldOrders);
-              }}
-            />
+              }}/>
+            </div>
           </div>
         ))}
         <hr />
