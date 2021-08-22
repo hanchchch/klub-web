@@ -1,7 +1,9 @@
 import { createStore, combineReducers, AnyAction } from "redux";
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
+import order from "./order";
 
-const combinedReducer = combineReducers({  });
+
+const combinedReducer = combineReducers({ order });
 export type CombinedState = ReturnType<typeof combinedReducer>;
 
 const reducer = (state: CombinedState, action: AnyAction) => {

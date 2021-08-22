@@ -20,6 +20,7 @@
 }
 
 .container {
+  font-family: "gopher", "GmarketSansMedium";
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -29,6 +30,9 @@
   hr {
     margin-top: 12px;
     border-top: 1px solid $theme-main;
+  }
+
+  & > * {
     width: 70%;
   }
 }
@@ -63,8 +67,11 @@
 }
 
 .donation {
-  width: 70%;
   margin-top: 2px;
   font-size: 12px;
-  font-family: "gopher", "GmarketSansMedium";
+}
+
+.order {
+  display: flex;
+  justify-content: space-between;
 }

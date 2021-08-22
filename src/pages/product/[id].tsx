@@ -4,6 +4,7 @@ import { categoryOptions, donation, options as optionsMap, products } from "@src
 import Main from "@src/components/templates/Main";
 import Dropdown from "@src/components/atoms/Dropdown";
 import TextInput from "@src/components/atoms/TextInput";
+import useOrders from "@src/utils/hooks/order";
 
 export default function ProductDetail(props: { id: number }) {
   const product = products.filter(product => product.id == props.id)[0];
@@ -12,9 +13,8 @@ export default function ProductDetail(props: { id: number }) {
       optionsMap[option].label
     ))
   )).flat();
-  const [options, setOptions] = useState(
-    Object.fromEntries(new Map(optionKeys.map(key => [key, ""])))
-  );
+  const initialOptions = Object.fromEntries(new Map(optionKeys.map(key => [key, ""])));
+  const [options, setOptions] = useState(initialOptions);
 
   const [name, setName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
@@ -22,8 +22,22 @@ export default function ProductDetail(props: { id: number }) {
 
   const [isShipping, setIsShipping] = useState<boolean>(false);
 
+  const [orders, setOrders] = useOrders();
+
   useEffect(() => {
-    console.log(options);
+    let blank = false;
+    optionKeys.forEach(key => {
+      if (options[key] === "") {
+        blank = true;
+      }
+    });
+    if (!blank) {
+      setOptions(initialOptions);
+      setOrders([
+        ...orders,
+        { product, options }
+      ]);
+    }
   }, [options]);
 
   return (
@@ -63,6 +77,13 @@ export default function ProductDetail(props: { id: number }) {
               onChange={(value) => setOptions(pre => ({ ...pre, [label]: value as string }))}
             />;
           })
+        ))}
+        <hr />
+        {orders.map((order, index) => (
+          <div className={styles.order} key={index}>
+            <div>{optionKeys.map(key => order.options[key]).join(" / ")}</div>
+            <div>수량</div>
+          </div>
         ))}
         <hr />
         <TextInput
