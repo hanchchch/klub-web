@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./[id].module.scss";
 import Main from "@src/components/templates/Main";
-import { products } from "@src/utils/store";
+import { categoryOptions, products } from "@src/utils/store";
+import Option from "@src/components/atoms/Option";
 
 export default function ProductDetail(props: { id: number }) {
   const product = products.filter(product => product.id == props.id)[0];
@@ -21,14 +22,33 @@ export default function ProductDetail(props: { id: number }) {
         </div>
         <div className={styles.image}>
 
-          <div className={styles.description}>
-            {product?.description}
-          </div>
+        </div>
+        <div className={styles.description}>
+          {product?.description}
         </div>
         <div className={styles.ordernow} style={{ backgroundImage: "url('/assets/ellipse.svg')" }}>
           ORDER NOW
         </div>
-        {product?.price}
+        {product.category.map(category => (
+          <div key={category} className={styles.category}>
+            {categoryOptions[category].map(option => (
+              <Option
+                key={option}
+                label={"Size"}
+                options={[{
+                  choice: "M",
+                  value: 0,
+                }, {
+                  choice: "L",
+                  value: 0,
+                }, {
+                  choice: "XL",
+                  value: 0,
+                }]}
+              />
+            ))}
+          </div>
+        ))}
       </div>
     </Main>
   );

@@ -37,10 +37,10 @@
   height: 40vh;
   margin: 24px 0;
   border: 1px solid black;
+}
 
-  .description {
-    font-family: 'gopher';
-  }
+.description {
+  font-family: 'gopher';
 }
 
 
@@ -51,4 +51,6 @@
   background-size: contain;
   background-repeat: no-repeat;
   text-align: center;
+  color: $ivory;
+  margin-top: 24px;
 }

@@ -1,4 +1,4 @@
-import { Product } from "@src/types/product";
+import { Product, ProductCategory } from "@src/types/product";
 
 export const products: Product[] = [
   {
@@ -39,7 +39,7 @@ export const products: Product[] = [
     price: 0,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
-    category: ["shirt", "sticker"],
+    category: ["shirtSet", "sticker"],
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ export const products: Product[] = [
     price: 0,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
-    category: ["shirt", "tumbler"],
+    category: ["shirtSet", "tumbler"],
   },
   {
     id: 6,
@@ -63,6 +63,13 @@ export const products: Product[] = [
     price: 0,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
-    category: ["shirt", "tumbler", "sticker"],
+    category: ["shirtSet", "tumbler", "sticker"],
   },
 ];
+
+export const categoryOptions: { [key in ProductCategory]: string[] } = {
+  shirt: ["size"],
+  sticker: [],
+  tumbler: ["color"],
+  shirtSet: ["size", "color"],
+};
