@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./[id].module.scss";
 import Main from "@src/components/templates/Main";
-import ProductCard from "@src/components/molecules/ProductCard";
 import { products } from "@src/utils/store";
 
 export default function ProductDetail(props: { id: number }) {
@@ -10,9 +9,11 @@ export default function ProductDetail(props: { id: number }) {
   return (
     <Main>
       <div className={styles.header}>
-        <div className={styles.logo}>
-          <embed src={"/assets/klub_logo.svg"} />
-        </div>
+        <a href="/">
+          <div className={styles.logo} >
+            <embed src={"/assets/klub_logo.svg"}/>
+          </div>
+        </a>
       </div>
       <div className={styles.container}>
         <div className={styles.title}>

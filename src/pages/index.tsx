@@ -3,9 +3,11 @@ import styles from "./index.module.scss";
 import Main from "@src/components/templates/Main";
 import ProductCard from "@src/components/molecules/ProductCard";
 import { products } from "@src/utils/store";
+import { Product } from "@src/types/product";
 
 export default function Index() {
-  const [show, setShow] = useState<"set" | "all">("set");
+  const [show, setShow] = useState<"set" | "all">("all");
+  const isSet = (p: Product) => p.category.length > 1;
 
   return (
     <Main>
@@ -29,7 +31,7 @@ export default function Index() {
         </div>
       </div>
       <div className={styles.container}>
-        {products.map(product => 
+        {products.filter(product => show === "all" ? !isSet(product) : isSet(product)).map(product => 
           <ProductCard
             key={product.id}
             product={product}

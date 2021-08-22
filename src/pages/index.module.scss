@@ -16,8 +16,10 @@
   justify-content: center;
 
   .logo {
-    padding: 20px;
+    height: 70vh;
+    padding: 0 40px;
     embed {
+      height: 100%;
       width: 100%;
     }
   }
