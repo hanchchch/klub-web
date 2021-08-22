@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./[id].module.scss";
-import { categoryOptions, donation, products } from "@src/utils/store";
+import { categoryOptions, donation, optionValues, products } from "@src/utils/store";
 import Main from "@src/components/templates/Main";
 import Dropdown from "@src/components/atoms/Dropdown";
 import TextInput from "@src/components/atoms/TextInput";
@@ -40,16 +40,7 @@ export default function ProductDetail(props: { id: number }) {
             <Dropdown
               key={option}
               label={"Size"}
-              options={[{
-                label: "M",
-                value: "M",
-              }, {
-                label: "L",
-                value: "L",
-              }, {
-                label: "XL",
-                value: "XL",
-              }]}
+              options={optionValues[option].map(value => ({ label: value, value: value }))}
             />
           ))
         ))}
