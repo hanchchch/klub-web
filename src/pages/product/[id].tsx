@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./[id].module.scss";
-import { categoryOptions, donation, options, products } from "@src/utils/store";
+import { categoryOptions, donation, options as optionsMap, products } from "@src/utils/store";
 import Main from "@src/components/templates/Main";
 import Dropdown from "@src/components/atoms/Dropdown";
 import TextInput from "@src/components/atoms/TextInput";
 
 export default function ProductDetail(props: { id: number }) {
   const product = products.filter(product => product.id == props.id)[0];
+  const optionKeys = product.category.map(category => (
+    categoryOptions[category].map(option => (
+      optionsMap[option].label
+    ))
+  )).flat();
+  const [options, setOptions] = useState(
+    Object.fromEntries(new Map(optionKeys.map(key => [key, ""])))
+  );
+
   const [name, setName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [address, setAddress] = useState<string>("");
 
   const [isShipping, setIsShipping] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log(options);
+  }, [options]);
 
   return (
     <Main>
@@ -36,13 +49,20 @@ export default function ProductDetail(props: { id: number }) {
           ORDER NOW
         </div>
         {product.category.map(category => (
-          categoryOptions[category].map(option => (
-            <Dropdown
+          categoryOptions[category].map(option => {
+            const label = optionsMap[option].label;
+            const values = optionsMap[option].values;
+            return <Dropdown
               key={option}
-              label={options[option].label}
-              options={options[option].values.map(value => ({ label: value, value: value }))}
-            />
-          ))
+              label={label}
+              options={[
+                { label: "Select", value: "" },
+                ...values.map(value => ({ label: value, value: value }))
+              ]}
+              value={options[label]}
+              onChange={(value) => setOptions(pre => ({ ...pre, [label]: value as string }))}
+            />;
+          })
         ))}
         <hr />
         <TextInput
