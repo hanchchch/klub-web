@@ -40,9 +40,8 @@
 }
 
 .description {
-  font-family: 'gopher';
+  font-family: "gopher";
 }
-
 
 .ordernow {
   width: 256px;
@@ -52,5 +51,11 @@
   background-repeat: no-repeat;
   text-align: center;
   color: $ivory;
-  margin-top: 24px;
+  margin: 12px 24px;
+}
+
+.donation {
+  margin-top: 2px;
+  font-size: 12px;
+  font-family: "gopher", "GmarketSansMedium";
 }

@@ -73,3 +73,7 @@ export const categoryOptions: { [key in ProductCategory]: string[] } = {
   tumbler: ["color"],
   shirtSet: ["size", "color"],
 };
+
+export const donation: string[] = [
+
+];

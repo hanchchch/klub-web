@@ -6,6 +6,7 @@
   width: 70%;
   min-width: 240px;
   line-height: 30px;
+  margin-top: 8px;
 
   .head {
     display: flex;
@@ -24,6 +25,7 @@
       background-color: transparent;
       padding: 12px;
       appearance: none;
+      border: 1px solid $black;
     }
   }
 }

@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import { BiDownArrow } from "react-icons/bi";
 
 interface DropdownProps {
-  label: string;
+  label?: string;
   options: {
     label: string;
     value: string | number;
@@ -11,7 +11,7 @@ interface DropdownProps {
 }
 
 export default function Dropdown(props: DropdownProps) {
-  const { label, options } = props;
+  const { label = "", options } = props;
   return (
     <div className={styles.wrapper}>
       <div className={styles.head}>
