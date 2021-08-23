@@ -4,6 +4,8 @@
 .container {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .header {
@@ -16,7 +18,9 @@
   justify-content: center;
 
   .logo {
+    margin: 24px 0;
     height: 70vh;
+    max-height: 400px;
     padding: 0 40px;
     embed {
       height: 100%;
@@ -26,6 +30,7 @@
 
   .choice {
     width: 80%;
+    max-width: 800px;
     display: flex;
     justify-content: space-between;
     color: $white;
