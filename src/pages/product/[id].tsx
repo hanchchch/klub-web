@@ -24,6 +24,10 @@ export default function ProductDetail(props: { id: number }) {
   const [orders, setOrders] = useOrders();
 
   useEffect(() => {
+    setOrders([]);
+  }, []);
+
+  useEffect(() => {
     let blank = false;
     optionKeys.forEach((key) => {
       if (options[key] === "") blank = true;
