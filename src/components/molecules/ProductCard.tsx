@@ -13,7 +13,7 @@ export default function ProductCard(props: ProductCardProps) {
   const router = useRouter();
   return (
     <Card onClick={() => router.push(`/product/${product.id}`)}>
-      <img src={product.image} alt={product.name} />
+      <img src={product.image} alt={product.name} style={{ width: "100%" }}/>
     </Card>
   );
 }
