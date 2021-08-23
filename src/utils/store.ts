@@ -4,7 +4,7 @@ export const products: Product[] = [
   {
     id: 0,
     name: "T-Shirt White",
-    price: 0,
+    price: 16900,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
     category: ["shirt"],
@@ -12,7 +12,7 @@ export const products: Product[] = [
   {
     id: 1,
     name: "T-Shirt Black",
-    price: 0,
+    price: 16900,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
     category: ["shirt"],
@@ -20,7 +20,7 @@ export const products: Product[] = [
   {
     id: 2,
     name: "Klub Stickers",
-    price: 0,
+    price: 7900,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
     category: ["sticker"],
@@ -28,7 +28,7 @@ export const products: Product[] = [
   {
     id: 3,
     name: "Tumbler",
-    price: 0,
+    price: 5900,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
     category: ["tumbler"],
@@ -36,7 +36,7 @@ export const products: Product[] = [
   {
     id: 4,
     name: "T-Shirt & Stickers",
-    price: 0,
+    price: 20800,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
     category: ["shirtSet", "sticker"],
@@ -44,7 +44,7 @@ export const products: Product[] = [
   {
     id: 5,
     name: "T-Shirt & Tumbler",
-    price: 0,
+    price: 22800,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
     category: ["shirtSet", "tumbler"],
@@ -52,7 +52,7 @@ export const products: Product[] = [
   {
     id: 6,
     name: "Tumbler & Stickers",
-    price: 0,
+    price: 11800,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
     category: ["tumbler", "sticker"],
@@ -60,7 +60,7 @@ export const products: Product[] = [
   {
     id: 7,
     name: "T-Shirt & Tumbler & Stickers",
-    price: 0,
+    price: 27700,
     description: "Product 0 description",
     image: "https://picsum.photos/200/300",
     category: ["shirtSet", "tumbler", "sticker"],
