@@ -139,10 +139,13 @@ export default function ProductDetail(props: { id: number }) {
         />}
         <Dropdown
           label={"Donation / 기부처"}
-          options={donation.map(donation => ({
-            label: donation,
-            value: donation,
-          }))}
+          options={[
+            { label: "Select", value: "" },
+            ...donation.map(donation => ({
+              label: donation,
+              value: donation,
+            }))
+          ]}
           value={orderer.donation}
           onChange={(v) => setOrderer({ ...orderer, donation: v })}
         />
