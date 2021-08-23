@@ -13,13 +13,11 @@ import { Ellipse } from "@src/components/atoms/Ellipse";
 import router from "next/router";
 
 export default function ProductDetail(props: { id: number }) {
-  const product = products.filter(product => product.id == props.id)[0];
-  const optionKeys = product.category.map(category => (
-    categoryOptions[category].map(option => (
-      optionsMap[option].label
-    ))
-  )).flat();
-  const initialOptions = Object.fromEntries(new Map(optionKeys.map(key => [key, ""])));
+  const product = products.filter((product) => product.id == props.id)[0];
+  const optionKeys = product
+    ? product.category.map((category) => categoryOptions[category].map((option) => optionsMap[option].label)).flat()
+    : [];
+  const initialOptions = Object.fromEntries(new Map(optionKeys.map((key) => [key, ""])));
   const [options, setOptions] = useState(initialOptions);
 
   const [orderer, setOrderer] = useOrderer();
@@ -27,14 +25,14 @@ export default function ProductDetail(props: { id: number }) {
 
   useEffect(() => {
     let blank = false;
-    optionKeys.forEach(key => {
+    optionKeys.forEach((key) => {
       if (options[key] === "") blank = true;
     });
     if (!blank) {
       let isSameExists = false;
-      orders.forEach(order => {
+      orders.forEach((order) => {
         let same = true;
-        optionKeys.forEach(key => {
+        optionKeys.forEach((key) => {
           if (order.options[key] !== options[key]) same = false;
         });
         if (same) isSameExists = true;
@@ -59,51 +57,47 @@ export default function ProductDetail(props: { id: number }) {
   return (
     <Main>
       <HeaderLayout>
-        <div className={styles.title}>
-          {product?.name}
-        </div>
-        <div className={styles.image}>
-
-        </div>
-        <div className={styles.description}>
-          {product?.description}
-        </div>
+        <div className={styles.title}>{product?.name}</div>
+        <div className={styles.image}></div>
+        <div className={styles.description}>{product?.description}</div>
         <Ellipse text={"ORDER NOW"} />
-        {product.category.map(category => (
-          categoryOptions[category].map(option => {
+        {product?.category.map((category) =>
+          categoryOptions[category].map((option) => {
             const label = optionsMap[option].label;
             const values = optionsMap[option].values;
-            return <Dropdown
-              key={option}
-              label={label}
-              options={[
-                { label: "Select", value: "" },
-                ...values.map(value => ({ label: value, value: value }))
-              ]}
-              value={options[label]}
-              onChange={(value) => setOptions(pre => ({ ...pre, [label]: value as string }))}
-            />;
+            return (
+              <Dropdown
+                key={option}
+                label={label}
+                options={[{ label: "Select", value: "" }, ...values.map((value) => ({ label: value, value: value }))]}
+                value={options[label]}
+                onChange={(value) => setOptions((pre) => ({ ...pre, [label]: value as string }))}
+              />
+            );
           })
-        ))}
+        )}
         <hr />
         {orders.map((order, index) => (
           <div className={styles.order} key={index}>
-            <div>{optionKeys.map(key => order.options[key]).join(" / ")}</div>
+            <div>{optionKeys.map((key) => order.options[key]).join(" / ")}</div>
             <div className={styles.control}>
               <NumberInput
                 value={order.options.quantity}
-                onChange={v => {
+                onChange={(v) => {
                   if (v < 1) return;
                   const oldOrders = orders;
                   oldOrders[index].options.quantity = v;
                   setOrders(oldOrders);
                 }}
               />
-              <BiX className={styles.cancel} onClick={() => {
-                const oldOrders = orders;
-                oldOrders.splice(index, 1);
-                setOrders(oldOrders);
-              }}/>
+              <BiX
+                className={styles.cancel}
+                onClick={() => {
+                  const oldOrders = orders;
+                  oldOrders.splice(index, 1);
+                  setOrders(oldOrders);
+                }}
+              />
             </div>
           </div>
         ))}
@@ -122,35 +116,41 @@ export default function ProductDetail(props: { id: number }) {
         />
         <Dropdown
           label={"Shipping / 배송 여부"}
-          options={[{
-            label: "배송",
-            value: "true",
-          }, {
-            label: "현장 결제",
-            value: "false",
-          }]}
+          options={[
+            {
+              label: "배송",
+              value: "true",
+            },
+            {
+              label: "현장 결제",
+              value: "false",
+            },
+          ]}
           value={`${orderer.isShipping}`}
           onChange={(v) => setOrderer({ ...orderer, isShipping: v === "true" })}
         />
-        {orderer.isShipping && <TextInput
-          label="Address / 주소"
-          value={orderer.address}
-          onChange={(v) => setOrderer({ ...orderer, address: v })}
-        />}
+        {orderer.isShipping && (
+          <TextInput
+            label="Address / 주소"
+            value={orderer.address}
+            onChange={(v) => setOrderer({ ...orderer, address: v })}
+          />
+        )}
         <Dropdown
           label={"Donation / 기부처"}
           options={[
             { label: "Select", value: "" },
-            ...donation.map(donation => ({
+            ...donation.map((donation) => ({
               label: donation,
               value: donation,
-            }))
+            })),
           ]}
           value={orderer.donation}
           onChange={(v) => setOrderer({ ...orderer, donation: v })}
         />
         <div className={styles.donation}>
-          Where should we donate?<br />
+          Where should we donate?
+          <br />
           수익금 기부를 위한 기부처를 골라주세요.
         </div>
         <Ellipse text={"CHECK!"} className={styles.check} onClick={() => router.push("/payment")} />
@@ -159,6 +159,6 @@ export default function ProductDetail(props: { id: number }) {
   );
 }
 
-ProductDetail.getInitialProps = async (ctx: { query: {id: number} }) => {
+ProductDetail.getInitialProps = async (ctx: { query: { id: number } }) => {
   return { id: ctx.query.id };
 };
