@@ -45,7 +45,13 @@ export default function ProductDetail(props: { id: number }) {
       if (isSameExists) return;
       setOrders([
         ...orders,
-        { product, options, quantity: 1 },
+        {
+          product,
+          options: {
+            ...options,
+            quantity: 1,
+          },
+        },
       ]);
     }
   }, [options]);
@@ -85,11 +91,11 @@ export default function ProductDetail(props: { id: number }) {
             <div>{optionKeys.map(key => order.options[key]).join(" / ")}</div>
             <div className={styles.control}>
               <NumberInput
-                value={order.quantity}
+                value={order.options.quantity}
                 onChange={v => {
                   if (v < 1) return;
                   const oldOrders = orders;
-                  oldOrders[index].quantity = v;
+                  oldOrders[index].options.quantity = v;
                   setOrders(oldOrders);
                 }}
               />

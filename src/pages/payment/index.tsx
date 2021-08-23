@@ -17,7 +17,7 @@ export default function Payment() {
   useEffect(() => {
     setPrice(
       orders
-        .map(o => o.product.price * o.quantity)
+        .map(o => o.product.price * o.options.quantity)
         .reduce((a, b) => a + b, 0)
     );
   }, [orders]);
