@@ -2,21 +2,21 @@ import React from "react";
 import styles from "./index.module.scss";
 import { BiDownArrow } from "react-icons/bi";
 
-interface DropdownProps {
+interface DropdownProps<T> {
   label?: string;
   options: {
     label: string;
-    value: string | number;
+    value: T;
   }[];
-  value?: string | number;
-  onChange?: (value: string | number) => void;
+  value?: T;
+  onChange?: (value: T) => void;
 }
 
-export default function Dropdown(props: DropdownProps) {
+export default function Dropdown<T extends string | number>(props: DropdownProps<T>) {
   const { label = "", options, value, onChange } = props;
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (onChange) {
-      onChange(e.target.value);
+      onChange(e.target.value as T);
     }
   };
 

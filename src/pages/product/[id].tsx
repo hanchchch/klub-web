@@ -4,6 +4,7 @@ import { categoryOptions, donation, options as optionsMap, products } from "@src
 import Main from "@src/components/templates/Main";
 import Dropdown from "@src/components/atoms/Dropdown";
 import TextInput from "@src/components/atoms/TextInput";
+import useOrderer from "@src/utils/hooks/orderer";
 import useOrders from "@src/utils/hooks/order";
 import NumberInput from "@src/components/atoms/NumberInput";
 import { BiX } from "react-icons/bi";
@@ -18,13 +19,11 @@ export default function ProductDetail(props: { id: number }) {
   const initialOptions = Object.fromEntries(new Map(optionKeys.map(key => [key, ""])));
   const [options, setOptions] = useState(initialOptions);
 
-  const [name, setName] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
+  const [orderer, setOrderer] = useOrderer();
+  const [orders, setOrders] = useOrders();
+
   const [address, setAddress] = useState<string>("");
 
-  const [isShipping, setIsShipping] = useState<boolean>(false);
-
-  const [orders, setOrders] = useOrders();
 
   useEffect(() => {
     let blank = false;
@@ -115,14 +114,14 @@ export default function ProductDetail(props: { id: number }) {
         <TextInput
           label="Your Name / 주문자 성명"
           placeholder="임꺽정"
-          value={name}
-          onChange={(v) => setName(v)}
+          value={orderer.name}
+          onChange={(v) => setOrderer({ ...orderer, name: v })}
         />
         <TextInput
           label="Phone Number / 연락처"
           placeholder="01012345678"
-          value={phone}
-          onChange={(v) => setPhone(v)}
+          value={orderer.phone}
+          onChange={(v) => setOrderer({ ...orderer, phone: v })}
         />
         <Dropdown
           label={"Shipping / 배송 여부"}
@@ -133,10 +132,10 @@ export default function ProductDetail(props: { id: number }) {
             label: "현장 결제",
             value: "false",
           }]}
-          onChange={(v) => setIsShipping(v === "true")}
-          value={`${isShipping}`}
+          value={`${orderer.isShipping}`}
+          onChange={(v) => setOrderer({ ...orderer, isShipping: v === "true" })}
         />
-        {isShipping && <TextInput
+        {orderer.isShipping && <TextInput
           label="Address / 주소"
           value={address}
           onChange={(v) => setAddress(v)}
@@ -147,6 +146,8 @@ export default function ProductDetail(props: { id: number }) {
             label: donation,
             value: donation,
           }))}
+          value={orderer.donation}
+          onChange={(v) => setOrderer({ ...orderer, donation: v })}
         />
         <div className={styles.donation}>
           Where should we donate?<br />

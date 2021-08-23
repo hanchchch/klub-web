@@ -16,7 +16,13 @@ export interface OrdererState {
 }
 
 const initialState: OrdererState = {
-  orderer: null,
+  orderer: {
+    name: "",
+    phone: "",
+    isShipping: false,
+    address: "",
+    donation: "",
+  },
 };
 
 export default function ordererReducer(state: OrdererState = initialState, action: OrdererAction): OrdererState {
