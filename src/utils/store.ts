@@ -61,7 +61,7 @@ export const products: Product[] = [
     id: 7,
     name: "T-Shirt & Tumbler & Stickers",
     price: 27700,
-    description: "포브스 선정 고대생 필수템 1위! 당신의 사라진 고뽕을 채워줄 아",
+    description: "포브스 선정 고대생 필수템 1위! 당신의 사라진 고뽕을 채워줄 아이템",
     image: "https://picsum.photos/200/300",
     category: ["shirtSet", "tumbler", "sticker"],
   },
@@ -74,7 +74,7 @@ export const categoryOptions: { [key in ProductCategory]: string[] } = {
   shirtSet: ["shirtSize", "shirtColor"],
 };
 
-export const options: { [key: string]: { label: string, values: string[] } } = {
+export const options: { [key: string]: { label: string; values: string[] } } = {
   shirtSize: {
     label: "T-Shirt Size / 티셔츠 사이즈",
     values: ["M", "L", "XL"],
