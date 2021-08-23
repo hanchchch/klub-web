@@ -36,4 +36,20 @@
     margin: 12px;
   }
 
+  .orderer {
+    margin: 16px 0;
+
+    .confirm {
+      font-family: "soap";
+      margin-bottom: 4px;
+    }
+
+    .row {
+      margin-bottom: 12px;
+
+      div:first-child {
+        font-size: 0.8em;
+      }
+    }
+  }
 }

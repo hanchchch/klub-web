@@ -51,6 +51,22 @@ export default function Payment() {
           카카오뱅크<br />
           3333 - 05 - 6961823 (장한나)
         </div>
+        <div className={styles.orderer}>
+          <div className={styles.confirm}>Confirm</div>
+          <div className={styles.row}>
+            <div>Orderer / 주문자</div>
+            <div>{orderer.name}</div>
+            <div>{orderer.phone}</div>
+          </div>
+          <div className={styles.row}>
+            <div>Shipping / 배송</div>
+            <div>{orderer.isShipping ? orderer.address : "현장 결제"}</div>
+          </div>
+          <div className={styles.row}>
+            <div>Donation / 기부처</div>
+            <div>{orderer.donation}</div>
+          </div>
+        </div>
         <Ellipse text={"DONE!"} onClick={() => router.push("/payment")} />
       </HeaderLayout>
     </Main>
