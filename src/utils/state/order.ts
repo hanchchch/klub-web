@@ -19,7 +19,7 @@ const initialState: OrderState = {
   orders: [],
 };
 
-export default function newAdminReducer(state: OrderState = initialState, action: OrderAction): OrderState {
+export default function orderReducer(state: OrderState = initialState, action: OrderAction): OrderState {
   switch (action.type) {
     case SET_ORDER:
       return { orders: action.orders };
