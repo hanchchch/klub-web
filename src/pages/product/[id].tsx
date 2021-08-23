@@ -109,12 +109,15 @@ export default function ProductDetail(props: { id: number }) {
         <TextInput
           label="Your Name / 주문자 성명"
           placeholder="임꺽정"
+          name="name"
           value={orderer.name}
           onChange={(v) => setOrderer({ ...orderer, name: v })}
         />
         <TextInput
           label="Phone Number / 연락처"
           placeholder="01012345678"
+          type="number"
+          name="phone"
           value={orderer.phone}
           onChange={(v) => setOrderer({ ...orderer, phone: v })}
         />
