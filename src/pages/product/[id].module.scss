@@ -2,23 +2,6 @@
 @import "@styles/constants.module.scss";
 @import "@styles/mixins.scss";
 
-.header {
-  position: fixed;
-  width: 100vw;
-  background-color: $theme-main;
-
-  .logo {
-    height: $header-height;
-    display: flex;
-    align-items: center;
-    
-    embed {
-      margin: 8px;
-      height: 80%;
-    }
-  }
-}
-
 .title {
   font-family: "soap";
   font-size: 2em;

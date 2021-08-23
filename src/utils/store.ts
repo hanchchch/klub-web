@@ -97,3 +97,5 @@ export const donation: string[] = [
   "[환경] 녹색법률센터(성북구)",
   "[학교] KU PRIDE CLUB",
 ];
+
+export const deliveryCharge = 3500;

@@ -25,9 +25,6 @@ export default function ProductDetail(props: { id: number }) {
   const [orderer, setOrderer] = useOrderer();
   const [orders, setOrders] = useOrders();
 
-  const [address, setAddress] = useState<string>("");
-
-
   useEffect(() => {
     let blank = false;
     optionKeys.forEach(key => {
@@ -131,8 +128,8 @@ export default function ProductDetail(props: { id: number }) {
         />
         {orderer.isShipping && <TextInput
           label="Address / 주소"
-          value={address}
-          onChange={(v) => setAddress(v)}
+          value={orderer.address}
+          onChange={(v) => setOrderer({ ...orderer, address: v })}
         />}
         <Dropdown
           label={"Donation / 기부처"}

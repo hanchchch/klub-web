@@ -4,7 +4,9 @@ import wrapper from "@src/utils/state/wrapper";
 import "@styles/global.scss";
 
 function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <Component {...pageProps} />
+  );
 }
 
 export default wrapper.withRedux(App);

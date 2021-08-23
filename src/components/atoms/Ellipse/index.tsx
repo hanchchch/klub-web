@@ -18,7 +18,7 @@ export function Ellipse(props: EllipseProps) {
 
   return (
     <div
-      className={`${styles.ordernow} ${className}`}
+      className={`${styles.ellipse} ${className}`}
       style={{
         backgroundImage: "url('/assets/ellipse_2.svg')",
         cursor: onClick ? "pointer" : "default",
