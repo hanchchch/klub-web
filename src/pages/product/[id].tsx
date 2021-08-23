@@ -8,6 +8,8 @@ import useOrderer from "@src/utils/hooks/orderer";
 import useOrders from "@src/utils/hooks/order";
 import NumberInput from "@src/components/atoms/NumberInput";
 import { BiX } from "react-icons/bi";
+import { Ellipse } from "@src/components/atoms/Ellipse";
+import router from "next/router";
 
 export default function ProductDetail(props: { id: number }) {
   const product = products.filter(product => product.id == props.id)[0];
@@ -69,9 +71,7 @@ export default function ProductDetail(props: { id: number }) {
         <div className={styles.description}>
           {product?.description}
         </div>
-        <div className={styles.ordernow} style={{ backgroundImage: "url('/assets/ellipse_2.svg')" }}>
-          ORDER NOW
-        </div>
+        <Ellipse text={"ORDER NOW"} />
         {product.category.map(category => (
           categoryOptions[category].map(option => {
             const label = optionsMap[option].label;
@@ -153,6 +153,7 @@ export default function ProductDetail(props: { id: number }) {
           Where should we donate?<br />
           수익금 기부를 위한 기부처를 골라주세요.
         </div>
+        <Ellipse text={"CHECK!"} className={styles.check} onClick={() => router.push("/payment")} />
       </div>
     </Main>
   );

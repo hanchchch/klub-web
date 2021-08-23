@@ -1,0 +1,15 @@
+@import "@styles/colors.module.scss";
+  
+.ordernow {
+  font-family: "soap";
+  width: 260px;
+  height: 100px;
+  font-size: 2em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: $ivory;
+  margin: 12px 24px 0 24px;
+
+  line-height: 75px;
+}

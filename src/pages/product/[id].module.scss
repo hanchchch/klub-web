@@ -26,6 +26,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: $header-height;
+  margin-bottom: 24px;
 
   hr {
     margin-top: 12px;
@@ -53,20 +54,6 @@
     font-family: "gopher";
   }
   
-  .ordernow {
-    font-family: "soap";
-    width: 260px;
-    height: 100px;
-    font-size: 2em;
-    background-size: contain;
-    background-repeat: no-repeat;
-    text-align: center;
-    color: $ivory;
-    margin: 12px 24px 0 24px;
-  
-    line-height: 75px;
-  }
-
   .donation {
     margin-top: 2px;
     font-size: 12px;
@@ -87,5 +74,9 @@
         margin-left: 12px;
       }
     }
+  }
+
+  .check {
+    margin-top: 24px;
   }
 }
