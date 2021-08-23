@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./[id].module.scss";
 import { categoryOptions, donation, options as optionsMap, products } from "@src/utils/store";
 import Main from "@src/components/templates/Main";
+import HeaderLayout from "@src/components/templates/HeaderLayout";
 import Dropdown from "@src/components/atoms/Dropdown";
 import TextInput from "@src/components/atoms/TextInput";
 import useOrderer from "@src/utils/hooks/orderer";
@@ -54,14 +55,7 @@ export default function ProductDetail(props: { id: number }) {
 
   return (
     <Main>
-      <div className={styles.header}>
-        <a href="/">
-          <div className={styles.logo} >
-            <embed src={"/assets/klub_logo.svg"}/>
-          </div>
-        </a>
-      </div>
-      <div className={styles.container}>
+      <HeaderLayout>
         <div className={styles.title}>
           {product?.name}
         </div>
@@ -154,7 +148,7 @@ export default function ProductDetail(props: { id: number }) {
           수익금 기부를 위한 기부처를 골라주세요.
         </div>
         <Ellipse text={"CHECK!"} className={styles.check} onClick={() => router.push("/payment")} />
-      </div>
+      </HeaderLayout>
     </Main>
   );
 }

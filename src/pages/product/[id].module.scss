@@ -19,64 +19,45 @@
   }
 }
 
-.container {
-  font-family: "gopher", "GmarketSansMedium";
-  width: 100vw;
+.title {
+  font-family: "soap";
+  font-size: 2em;
+  margin: 12px 0;
+}
+
+.image {
+  width: 80vw;
+  height: 40vh;
+  margin: 24px 0;
+  border: 1px solid black;
+}
+
+.description {
+  font-family: "gopher";
+}
+
+.donation {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.order {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  padding-top: $header-height;
-  margin-bottom: 24px;
+  margin-bottom: 2px;
 
-  hr {
-    margin-top: 12px;
-    border-top: 1px solid $theme-main;
-  }
-
-  & > * {
-    width: 70%;
-  }
-
-  .title {
-    font-family: "soap";
-    font-size: 2em;
-    margin: 12px 0;
-  }
-  
-  .image {
-    width: 80vw;
-    height: 40vh;
-    margin: 24px 0;
-    border: 1px solid black;
-  }
-  
-  .description {
-    font-family: "gopher";
-  }
-  
-  .donation {
-    margin-top: 2px;
-    font-size: 12px;
-  }
-  
-  .order {
+  .control {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 2px;
+    justify-content: center;
 
-    .control {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .cancel {
-        margin-left: 12px;
-      }
+    .cancel {
+      margin-left: 12px;
     }
   }
+}
 
-  .check {
-    margin-top: 24px;
-  }
+.check {
+  margin-top: 24px;
 }
