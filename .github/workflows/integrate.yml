@@ -28,6 +28,7 @@ jobs:
       - run: npm run build
         env:
             CI: true
+            WEBHOOK_URI: ${{ secrets.WEBHOOK_URI }}
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2

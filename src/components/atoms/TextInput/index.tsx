@@ -8,10 +8,11 @@ interface TextInputProps {
   type?: "text" | "number";
   name?: string;
   placeholder?: string;
+  error?: string;
 }
 
 export default function TextInput(props: TextInputProps) {
-  const { label, value, onChange, type = "text", name = "", placeholder = "" } = props;
+  const { label, value, onChange, type = "text", name = "", placeholder = "", error } = props;
   return (
     <div className={styles.wrapper}>
       <div className={styles.head}>{label && `*${label}`}</div>
@@ -24,6 +25,7 @@ export default function TextInput(props: TextInputProps) {
           placeholder={placeholder}
         />
       </div>
+      <div className={styles.error}>{error}</div>
     </div>
   );
 }

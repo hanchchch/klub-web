@@ -15,3 +15,5 @@ export interface Order {
     quantity: number;
   };
 }
+
+export type OrdererError = Partial<{ name: string; phone: string; address: string; donation: string }>;

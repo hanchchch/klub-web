@@ -1,6 +1,5 @@
 @import "@styles/colors.module.scss";
 
-
 .wrapper {
   font-family: "gopher", "GmarketSansMedium";
   min-width: 240px;
@@ -17,7 +16,7 @@
     top: 44px;
     right: 12px;
   }
-  
+
   .container {
     select {
       width: 100%;
@@ -26,5 +25,10 @@
       appearance: none;
       border: 1px solid $black;
     }
+  }
+
+  .error {
+    font-size: 12px;
+    line-height: 12px;
   }
 }

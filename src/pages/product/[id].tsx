@@ -11,6 +11,8 @@ import NumberInput from "@src/components/atoms/NumberInput";
 import { BiX } from "react-icons/bi";
 import { Ellipse } from "@src/components/atoms/Ellipse";
 import router from "next/router";
+import { validateOrderer } from "@src/utils/validate";
+import { OrdererError } from "@src/types/order";
 
 export default function ProductDetail(props: { id: number }) {
   const product = products.filter((product) => product.id == props.id)[0];
@@ -19,6 +21,7 @@ export default function ProductDetail(props: { id: number }) {
     : [];
   const initialOptions = Object.fromEntries(new Map(optionKeys.map((key) => [key, ""])));
   const [options, setOptions] = useState(initialOptions);
+  const [ordererError, setOrdererError] = useState<OrdererError>({});
 
   const [orderer, setOrderer] = useOrderer();
   const [orders, setOrders] = useOrders();
@@ -57,6 +60,17 @@ export default function ProductDetail(props: { id: number }) {
       ]);
     }
   }, [options]);
+
+  const handleDone = () => {
+    if (orders.length <= 0) return;
+
+    const errors = validateOrderer(orderer);
+    if (Object.keys(errors).length > 0) {
+      setOrdererError(errors);
+    } else {
+      router.push("/payment");
+    }
+  };
 
   return (
     <Main>
@@ -111,6 +125,7 @@ export default function ProductDetail(props: { id: number }) {
           placeholder="임꺽정"
           name="name"
           value={orderer.name}
+          error={ordererError.name}
           onChange={(v) => setOrderer({ ...orderer, name: v })}
         />
         <TextInput
@@ -119,6 +134,7 @@ export default function ProductDetail(props: { id: number }) {
           type="number"
           name="phone"
           value={orderer.phone}
+          error={ordererError.phone}
           onChange={(v) => setOrderer({ ...orderer, phone: v })}
         />
         <Dropdown
@@ -140,6 +156,7 @@ export default function ProductDetail(props: { id: number }) {
           <TextInput
             label="Address / 주소"
             value={orderer.address}
+            error={ordererError.address}
             onChange={(v) => setOrderer({ ...orderer, address: v })}
           />
         )}
@@ -153,6 +170,7 @@ export default function ProductDetail(props: { id: number }) {
             })),
           ]}
           value={orderer.donation}
+          error={ordererError.donation}
           onChange={(v) => setOrderer({ ...orderer, donation: v })}
         />
         <div className={styles.donation}>
@@ -160,7 +178,7 @@ export default function ProductDetail(props: { id: number }) {
           <br />
           수익금 기부를 위한 기부처를 골라주세요.
         </div>
-        <Ellipse text={"CHECK!"} className={styles.check} onClick={() => router.push("/payment")} />
+        <Ellipse text={"CHECK!"} className={styles.check} onClick={handleDone} />
       </HeaderLayout>
     </Main>
   );
