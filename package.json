@@ -15,6 +15,7 @@
     ".next/cache"
   ],
   "dependencies": {
+    "@slack/webhook": "^6.0.0",
     "@types/lodash": "^4.14.161",
     "axios": "^0.21.1",
     "moment": "^2.29.1",

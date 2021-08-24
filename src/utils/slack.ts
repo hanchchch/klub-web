@@ -1,7 +1,9 @@
 import { Order, Orderer } from "@src/types/order";
 import { Product } from "@src/types/product";
+import { IncomingWebhook } from "@slack/webhook";
 
-const WEBHOOK_URI = process.env.WEBHOOK_URI;
+const WEBHOOK_URI = process.env.REACT_APP_WEBHOOK_URI;
+const webhook = new IncomingWebhook(WEBHOOK_URI);
 
 export const sendSlackMessage = (
   orderer: Orderer,
@@ -9,7 +11,7 @@ export const sendSlackMessage = (
   total: number,
   optionKeys: (product: Product) => string[]
 ) => {
-  const payload = {
+  webhook.send({
     blocks: [
       {
         type: "header",
@@ -52,14 +54,5 @@ export const sendSlackMessage = (
         },
       },
     ],
-  };
-
-  fetch(WEBHOOK_URI, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
   });
 };
