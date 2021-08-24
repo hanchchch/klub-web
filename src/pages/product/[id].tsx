@@ -76,7 +76,9 @@ export default function ProductDetail(props: { id: number }) {
     <Main>
       <HeaderLayout>
         <div className={styles.title}>{product?.name}</div>
-        <div className={styles.image}></div>
+        <div className={styles.image}>
+          <img src={product?.image} />
+        </div>
         <div className={styles.description}>{product?.description}</div>
         <Ellipse text={"ORDER NOW"} />
         {product?.category.map((category) =>

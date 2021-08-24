@@ -6,7 +6,7 @@ export const products: Product[] = [
     name: "T-Shirt White",
     price: 16900,
     description: "통통튀는 MD가 좋은 고대생을 위한 KLUB 캐릭터 프린팅 반팔",
-    image: "https://picsum.photos/200/300",
+    image: "/assets/images/shirts.jpeg",
     category: ["shirt"],
   },
   {
@@ -14,7 +14,7 @@ export const products: Product[] = [
     name: "T-Shirt Black",
     price: 16900,
     description: "심플한 게 좋은 고대생을 위한 고려대 로고 프린팅 반팔",
-    image: "https://picsum.photos/200/300",
+    image: "/assets/images/shirts.jpeg",
     category: ["shirt"],
   },
   {
@@ -22,7 +22,7 @@ export const products: Product[] = [
     name: "Klub Stickers",
     price: 7900,
     description: "노트북, 캐리어 꾸미는 걸 좋아하는 고대생을 위한 자체제작 스티커 세트 ",
-    image: "https://picsum.photos/200/300",
+    image: "/assets/images/sticker.jpeg",
     category: ["sticker"],
   },
   {
@@ -30,7 +30,7 @@ export const products: Product[] = [
     name: "Tumbler",
     price: 5900,
     description: "에코 라이프를 실천하는 당신을 위한 리유저블 텀블러",
-    image: "https://picsum.photos/200/300",
+    image: "/assets/images/tumbler.jpeg",
     category: ["tumbler"],
   },
   {

@@ -11,9 +11,11 @@
 
 .image {
   width: 80vw;
-  height: 40vh;
   margin: 24px 0;
-  border: 1px solid black;
+
+  img {
+    width: 100%;
+  }
 }
 
 .description {
