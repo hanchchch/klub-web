@@ -2,7 +2,8 @@ import { Order, Orderer } from "@src/types/order";
 import { Product } from "@src/types/product";
 import { IncomingWebhook } from "@slack/webhook";
 
-const WEBHOOK_URI = process.env.REACT_APP_WEBHOOK_URI;
+// const WEBHOOK_URI = process.env.REACT_APP_WEBHOOK_URI;
+const WEBHOOK_URI = "https://hooks.slack.com/services/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";
 const webhook = new IncomingWebhook(WEBHOOK_URI);
 
 export const sendSlackMessage = (
