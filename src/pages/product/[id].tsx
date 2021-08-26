@@ -13,6 +13,7 @@ import { Ellipse } from "@src/components/atoms/Ellipse";
 import router from "next/router";
 import { validateOrderer } from "@src/utils/validate";
 import { OrdererError } from "@src/types/order";
+import { Button } from "@src/components/atoms/Button";
 
 export default function ProductDetail(props: { id: number }) {
   const product = products.filter((product) => product.id == props.id)[0];
@@ -184,7 +185,7 @@ export default function ProductDetail(props: { id: number }) {
           <br />
           수익금 기부를 위한 기부처를 골라주세요.
         </div>
-        <Ellipse text={"CHECK!"} className={styles.check} onClick={handleDone} />
+        <Button text={"check!"} className={styles.check} onClick={handleDone} />
       </HeaderLayout>
     </Main>
   );

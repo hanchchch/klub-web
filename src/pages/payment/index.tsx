@@ -9,6 +9,7 @@ import HeaderLayout from "@src/components/templates/HeaderLayout";
 import { categoryOptions, deliveryCharge, options } from "@src/utils/store";
 import { Product } from "@src/types/product";
 import { sendSlackMessage } from "@src/utils/slack";
+import { Button } from "@src/components/atoms/Button";
 
 export default function Payment() {
   const [orders] = useOrders();
@@ -82,8 +83,8 @@ export default function Payment() {
             <div>{orderer.donation}</div>
           </div>
         </div>
-        <Ellipse
-          text={"DONE!"}
+        <Button
+          text={"done!"}
           onClick={() => {
             alert("주문이 완료되었습니다");
             sendSlackMessage(orderer, orders, price, optionKeys);

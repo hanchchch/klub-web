@@ -1,30 +1,16 @@
 import React from "react";
 import styles from "./index.module.scss";
 
-
 interface EllipseProps {
   text?: string;
   className?: string;
-  onClick?: () => void;
 }
 
 export function Ellipse(props: EllipseProps) {
-  const { className = "", text, onClick } = props;
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-    }
-  };
+  const { className = "", text } = props;
 
   return (
-    <div
-      className={`${styles.ellipse} ${className}`}
-      style={{
-        backgroundImage: "url('/assets/ellipse_2.svg')",
-        cursor: onClick ? "pointer" : "default",
-      }}
-      onClick={handleClick}
-    >
+    <div className={`${styles.ellipse} ${className}`} style={{ backgroundImage: "url('/assets/ellipse_2.svg')" }}>
       {text}
     </div>
   );
