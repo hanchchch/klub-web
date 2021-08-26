@@ -106,7 +106,7 @@ export default function ProductDetail(props: { id: number }) {
           ))}
         </div>
         <div className={styles.price}>
-          {product.orignalPrice && (
+          {product?.orignalPrice && (
             <div className={styles.original}>
               ₩{product.orignalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </div>
