@@ -10,11 +10,19 @@
 }
 
 .image {
-  width: 80vw;
+  width: 100vw !important;
+  display: flex;
+  overflow: auto;
+
+  scroll-snap-type: x mandatory;
   margin: 24px 0;
 
+  & > div {
+    scroll-snap-align: start;
+  }
+
   img {
-    width: 100%;
+    width: 100vw;
   }
 }
 
