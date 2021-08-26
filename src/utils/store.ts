@@ -1,12 +1,21 @@
 import { Product, ProductCategory } from "@src/types/product";
 
+const toImages = (name: string, num: number) => {
+  const images = [];
+  for (let i = 1; i <= num; i++) {
+    images.push(`/assets/images/${name}_${i}.jpeg`);
+  }
+  return images;
+};
+
 export const products: Product[] = [
   {
     id: 0,
     name: "T-Shirt White",
     price: 16900,
     description: "통통튀는 MD가 좋은 고대생을 위한 KLUB 캐릭터 프린팅 반팔",
-    image: "/assets/images/shirts.jpeg",
+    image: "/assets/images/shirtW_7.jpeg",
+    images: toImages("shirtW", 8),
     category: ["shirt"],
   },
   {
@@ -14,7 +23,8 @@ export const products: Product[] = [
     name: "T-Shirt Black",
     price: 16900,
     description: "심플한 게 좋은 고대생을 위한 고려대 로고 프린팅 반팔",
-    image: "/assets/images/shirts.jpeg",
+    image: "/assets/images/shirtB_6.jpeg",
+    images: toImages("shirtB", 6),
     category: ["shirt"],
   },
   {
@@ -22,7 +32,8 @@ export const products: Product[] = [
     name: "Klub Stickers",
     price: 7900,
     description: "노트북, 캐리어 꾸미는 걸 좋아하는 고대생을 위한 자체제작 스티커 세트 ",
-    image: "/assets/images/sticker.jpeg",
+    image: "/assets/images/sticker_1.jpeg",
+    images: toImages("sticker", 5),
     category: ["sticker"],
   },
   {
@@ -30,7 +41,8 @@ export const products: Product[] = [
     name: "Tumbler",
     price: 5900,
     description: "에코 라이프를 실천하는 당신을 위한 리유저블 텀블러",
-    image: "/assets/images/tumbler.jpeg",
+    image: "/assets/images/tumbler_4.jpeg",
+    images: toImages("tumbler", 6),
     category: ["tumbler"],
   },
   {
@@ -38,7 +50,8 @@ export const products: Product[] = [
     name: "T-Shirt & Stickers",
     price: 20800,
     description: "애교심 넘치나 수줍은 당신을 위한! 고대생인듯 아닌듯 소소하게 느낌내기 좋은 아이템",
-    image: "https://picsum.photos/200/300",
+    image: "/assets/images/stickShirt_1.jpeg",
+    images: toImages("stickShirt", 1),
     category: ["shirtSet", "sticker"],
   },
   {
@@ -46,7 +59,8 @@ export const products: Product[] = [
     name: "T-Shirt & Tumbler",
     price: 22800,
     description: "이번 학기 과탑 예약! 고대티 입고 고대 텀블러에 커피 마시며 열공할 당신을 위한 아이템",
-    image: "https://picsum.photos/200/300",
+    image: "/assets/images/shirtTum_1.jpeg",
+    images: toImages("shirtTum", 3),
     category: ["shirtSet", "tumbler"],
   },
   {
@@ -54,7 +68,8 @@ export const products: Product[] = [
     name: "Tumbler & Stickers",
     price: 11800,
     description: "고대를 사랑하는 모든 분들께 선물하세요! 수험생, 선후배 선물로 제격인 아이템",
-    image: "https://picsum.photos/200/300",
+    image: "/assets/images/stickTum_1.jpeg",
+    images: toImages("stickTum", 2),
     category: ["tumbler", "sticker"],
   },
   {
@@ -62,7 +77,8 @@ export const products: Product[] = [
     name: "T-Shirt & Tumbler & Stickers",
     price: 27700,
     description: "포브스 선정 고대생 필수템 1위! 당신의 사라진 고뽕을 채워줄 아이템",
-    image: "https://picsum.photos/200/300",
+    image: "/assets/images/allSet_2.jpeg",
+    images: toImages("allSet", 2),
     category: ["shirtSet", "tumbler", "sticker"],
   },
 ];
