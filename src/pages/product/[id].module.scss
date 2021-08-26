@@ -71,3 +71,13 @@
     }
   }
 }
+
+.agree {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > input {
+    margin-left: 4px;
+  }
+}

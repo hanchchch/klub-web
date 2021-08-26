@@ -24,6 +24,7 @@ export default function ProductDetail(props: { id: number }) {
   const initialOptions = Object.fromEntries(new Map(optionKeys.map((key) => [key, ""])));
   const [options, setOptions] = useState(initialOptions);
   const [ordererError, setOrdererError] = useState<OrdererError>({});
+  const [agree, setAgree] = useState<boolean>(false);
 
   const [orderer, setOrderer] = useOrderer();
   const [orders, setOrders] = useOrders();
@@ -76,13 +77,20 @@ export default function ProductDetail(props: { id: number }) {
   }, [options]);
 
   const handleDone = () => {
-    if (orders.length <= 0) return;
+    if (orders.length <= 0) {
+      alert("옵션을 선택해주세요.");
+      return;
+    }
 
     const errors = validateOrderer(orderer);
     if (Object.keys(errors).length > 0) {
       setOrdererError(errors);
     } else {
-      router.push("/payment");
+      if (!agree) {
+        alert("주문자 식별 및 안내와 배송을 위해 주문자의 전화번호와 주소 제공의 동의가 필요합니다.");
+      } else {
+        router.push("/payment");
+      }
     }
   };
 
@@ -207,6 +215,10 @@ export default function ProductDetail(props: { id: number }) {
           Where should we donate?
           <br />
           수익금 기부를 위한 기부처를 골라주세요.
+        </div>
+        <div className={styles.agree}>
+          <div>개인 정보 수집 동의</div>
+          <input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} />
         </div>
         <Button text={"check!"} className={styles.check} onClick={handleDone} />
       </HeaderLayout>
