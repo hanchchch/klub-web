@@ -3,7 +3,7 @@
 @import "@styles/mixins.scss";
 
 .container {
-  padding-top: 15vh;
+  padding-top: 10vh;
 
   hr {
     margin-top: 12px;
@@ -26,23 +26,38 @@
 
     td {
       text-align: left;
+      font-size: 0.8em;
+
+      &:last-child {
+        font-size: 1em;
+      }
     }
   }
 
   .check {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 1em;
     line-height: 20px;
     margin: 12px;
   }
 
-  .orderer {
-    margin: 16px 0;
+  .guide {
+    text-align: center;
+    width: 90vw !important;
+    font-size: 0.9em;
+    margin-top: 24px;
+    word-break: keep-all;
+    color: $theme-main;
+  }
 
-    .confirm {
-      font-family: "soap";
-      margin-bottom: 4px;
-    }
+  .title {
+    font-family: "soap", "GmarketSansMedium";
+    font-size: 1.2em;
+    margin-bottom: 4px;
+  }
+
+  .orderer {
+    margin-bottom: 20px;
 
     .row {
       margin-bottom: 12px;

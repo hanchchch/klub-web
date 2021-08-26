@@ -28,7 +28,23 @@ export default function Payment() {
     <Main>
       <HeaderLayout className={styles.container}>
         <Ellipse text={"PAYMENT"} />
-        <div>Order Summary / 주문 내역</div>
+        <div className={styles.orderer}>
+          <div className={styles.title}>Confirm</div>
+          <div className={styles.row}>
+            <div>Orderer / 주문자</div>
+            <div>{orderer.name}</div>
+            <div>{orderer.phone}</div>
+          </div>
+          <div className={styles.row}>
+            <div>Shipping / 배송</div>
+            <div>{orderer.isShipping ? orderer.address : "현장 수령"}</div>
+          </div>
+          <div className={styles.row}>
+            <div>Donation / 기부처</div>
+            <div>{orderer.donation}</div>
+          </div>
+        </div>
+        <div className={styles.title}>Order Summary / 주문 내역</div>
         <hr />
         <table>
           <tbody>
@@ -67,28 +83,26 @@ export default function Payment() {
           <br />
           3333 - 05 - 6961823 (장한나)
         </div>
-        <div className={styles.orderer}>
-          <div className={styles.confirm}>Confirm</div>
-          <div className={styles.row}>
-            <div>Orderer / 주문자</div>
-            <div>{orderer.name}</div>
-            <div>{orderer.phone}</div>
-          </div>
-          <div className={styles.row}>
-            <div>Shipping / 배송</div>
-            <div>{orderer.isShipping ? orderer.address : "현장 결제"}</div>
-          </div>
-          <div className={styles.row}>
-            <div>Donation / 기부처</div>
-            <div>{orderer.donation}</div>
-          </div>
+        <div className={styles.guide}>
+          상단의 계좌로 주문 금액 이체를 완료하셨다면…
+          <br />
+          하단의 done! 버튼을 눌러주세요.
         </div>
+
         <Button
           text={"done!"}
-          onClick={() => {
-            alert("주문이 완료되었습니다");
-            sendSlackMessage(orderer, orders, price, optionKeys);
-            router.push("/");
+          onClick={async () => {
+            if (!confirm("주문자/주문 정보가 정확한가요?")) return;
+            if (!confirm("상단의 계좌로 주문 금액을 이체하셨나요?")) return;
+            try {
+              const res = await sendSlackMessage(orderer, orders, price, optionKeys);
+              console.log(res);
+              alert("주문이 완료되었습니다!");
+              router.push("/");
+            } catch (e) {
+              alert("에러가 발생했습니다. 다시 시도해주세요.");
+              console.error(e);
+            }
           }}
         />
       </HeaderLayout>

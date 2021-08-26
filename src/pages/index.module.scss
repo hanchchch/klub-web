@@ -49,3 +49,23 @@
     }
   }
 }
+
+.notice {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: "gopher", "GmarketSansMedium";
+  padding-bottom: 40px;
+
+  .title {
+    font-size: 0.9em;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .content {
+    font-size: 0.8em;
+  }
+  .right {
+    text-align: right;
+  }
+}

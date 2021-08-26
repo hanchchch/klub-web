@@ -20,6 +20,7 @@ export default function ProductDetail(props: { id: number }) {
   const optionKeys = product
     ? product.category.map((category) => categoryOptions[category].map((option) => optionsMap[option].label)).flat()
     : [];
+  const nonOption = optionKeys.length == 0;
   const initialOptions = Object.fromEntries(new Map(optionKeys.map((key) => [key, ""])));
   const [options, setOptions] = useState(initialOptions);
   const [ordererError, setOrdererError] = useState<OrdererError>({});
@@ -32,6 +33,18 @@ export default function ProductDetail(props: { id: number }) {
   }, []);
 
   useEffect(() => {
+    if (nonOption) {
+      setOrders([
+        {
+          product,
+          options: {
+            quantity: 1,
+          },
+        },
+      ]);
+      return;
+    }
+
     let blank = false;
     optionKeys.forEach((key) => {
       if (options[key] === "") blank = true;
@@ -84,6 +97,14 @@ export default function ProductDetail(props: { id: number }) {
             </div>
           ))}
         </div>
+        <div className={styles.price}>
+          {product.orignalPrice && (
+            <div className={styles.original}>
+              ₩{product.orignalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </div>
+          )}
+          ₩{product?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </div>
         <div className={styles.description}>{product?.description}</div>
         <Ellipse text={"ORDER NOW"} />
         {product?.category.map((category) =>
@@ -104,7 +125,7 @@ export default function ProductDetail(props: { id: number }) {
         <hr />
         {orders.map((order, index) => (
           <div className={styles.order} key={index}>
-            <div>{optionKeys.map((key) => order.options[key]).join(" / ")}</div>
+            <div>{!nonOption ? optionKeys.map((key) => order.options[key]).join(" / ") : "수량"}</div>
             <div className={styles.control}>
               <NumberInput
                 value={order.options.quantity}
@@ -115,14 +136,16 @@ export default function ProductDetail(props: { id: number }) {
                   setOrders(oldOrders);
                 }}
               />
-              <BiX
-                className={styles.cancel}
-                onClick={() => {
-                  const oldOrders = orders;
-                  oldOrders.splice(index, 1);
-                  setOrders(oldOrders);
-                }}
-              />
+              {!nonOption && (
+                <BiX
+                  className={styles.cancel}
+                  onClick={() => {
+                    const oldOrders = orders;
+                    oldOrders.splice(index, 1);
+                    setOrders(oldOrders);
+                  }}
+                />
+              )}
             </div>
           </div>
         ))}
@@ -152,7 +175,7 @@ export default function ProductDetail(props: { id: number }) {
               value: "true",
             },
             {
-              label: "현장 결제",
+              label: "유니스토어 현장 수령",
               value: "false",
             },
           ]}

@@ -5,7 +5,7 @@
 .title {
   font-family: "soap";
   font-size: 2em;
-  margin: 12px 0;
+  margin: 24px 0;
   text-align: center;
 }
 
@@ -15,7 +15,6 @@
   overflow: auto;
 
   scroll-snap-type: x mandatory;
-  margin: 24px 0;
 
   & > div {
     scroll-snap-align: start;
@@ -26,9 +25,28 @@
   }
 }
 
+.price {
+  font-family: "soap", "GmarketSansMedium";
+  font-size: 1.2em;
+  text-align: center;
+  margin: 24px 0;
+  color: $theme-main;
+
+  .original {
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+    color: $grey;
+  }
+}
+
 .description {
+  width: 95vw !important;
+  word-break: keep-all;
+  font-size: 0.9em;
   font-family: "gopher", "GmarketSansMedium";
-  margin: 12px 0;
+  margin-bottom: 36px;
+  text-align: center;
+  white-space: pre-wrap;
 }
 
 .donation {

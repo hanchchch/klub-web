@@ -6,6 +6,7 @@ export type Color = "White" | "Black" | "Pink";
 export interface Product {
   id: number;
   name: string;
+  orignalPrice?: number;
   price: number;
   description?: string;
   image: string;

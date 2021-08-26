@@ -32,6 +32,13 @@ export default function Index() {
             <ProductCard key={product.id} product={product} />
           ))}
       </div>
+      <div className={styles.notice}>
+        <div></div>
+        <div className={styles.right}>
+          <div className={styles.title}>문의</div>
+          <div className={styles.content}>instagram @klub_project</div>
+        </div>
+      </div>
     </Main>
   );
 }
