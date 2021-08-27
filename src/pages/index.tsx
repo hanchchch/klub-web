@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./index.module.scss";
+import Link from "next/link";
 import Main from "@src/components/templates/Main";
 import ProductCard from "@src/components/molecules/ProductCard";
 import { products } from "@src/utils/store";
@@ -13,6 +14,13 @@ export default function Index() {
   return (
     <Main>
       <div className={styles.header}>
+        <div className={styles.buttons}>
+          <Link href={"/my"}>
+            <a>
+              <div className={styles.myOrder}>My Orders</div>
+            </a>
+          </Link>
+        </div>
         <div className={styles.logo}>
           <embed src={"/assets/klub_logo.svg"} />
         </div>

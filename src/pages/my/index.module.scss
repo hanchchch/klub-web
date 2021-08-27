@@ -1,0 +1,61 @@
+@import "@styles/colors.module.scss";
+@import "@styles/constants.module.scss";
+@import "@styles/mixins.scss";
+
+.container {
+  padding-top: 10vh;
+
+  hr {
+    margin-top: 12px;
+    border-top: 1px solid $black;
+
+    &.bold {
+      border-top-width: 2px;
+    }
+  }
+
+  tbody {
+    tr {
+      width: 100%;
+
+      &.total {
+        font-family: "soap", "GmarketSansMedium";
+        font-size: 1.5em;
+      }
+    }
+
+    td {
+      text-align: left;
+      font-size: 0.8em;
+
+      &:last-child {
+        font-size: 1em;
+      }
+    }
+  }
+
+  .check {
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 20px;
+    margin: 12px;
+  }
+
+  .title {
+    font-family: "soap", "GmarketSansMedium";
+    font-size: 1.2em;
+    margin-bottom: 4px;
+  }
+
+  .orderer {
+    margin-bottom: 20px;
+
+    .row {
+      margin-bottom: 12px;
+
+      div:first-child {
+        font-size: 0.8em;
+      }
+    }
+  }
+}

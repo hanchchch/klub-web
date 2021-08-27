@@ -17,3 +17,16 @@ export interface Order {
 }
 
 export type OrdererError = Partial<{ name: string; phone: string; address: string; donation: string }>;
+
+export interface OrdererResponse {
+  username: string;
+  phone: string;
+  address: string;
+  donation: string;
+  orders: {
+    order: string;
+    total: number;
+    created_time: Date;
+    pay_time: Date;
+  }[];
+}

@@ -14,6 +14,7 @@ import router from "next/router";
 import { validateOrderer } from "@src/utils/validate";
 import { OrdererError } from "@src/types/order";
 import { Button } from "@src/components/atoms/Button";
+import { addComma } from "@src/utils/math";
 
 export default function ProductDetail(props: { id: number }) {
   const product = products.filter((product) => product.id == props.id)[0];
@@ -106,12 +107,8 @@ export default function ProductDetail(props: { id: number }) {
           ))}
         </div>
         <div className={styles.price}>
-          {product?.orignalPrice && (
-            <div className={styles.original}>
-              ₩{product.orignalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-            </div>
-          )}
-          ₩{product?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          {product?.orignalPrice && <div className={styles.original}>₩{addComma(product?.orignalPrice || 0)}</div>}₩
+          {addComma(product?.price || 0)}
         </div>
         <div className={styles.description}>{product?.description}</div>
         <Ellipse text={"ORDER NOW"} />

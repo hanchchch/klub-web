@@ -1,4 +1,4 @@
-import { Order, Orderer } from "@src/types/order";
+import { Order, Orderer, OrdererResponse } from "@src/types/order";
 import { Product } from "@src/types/product";
 import axios from "axios";
 
@@ -36,6 +36,15 @@ export const postOrder = async (
   });
   if (resOrder.status === 200) {
     return resOrder.data;
+  }
+  return null;
+};
+
+export const getOrderer = async (phone: string) => {
+  const res = await axios.get<OrdererResponse>(`/api/order/orderer/${phone}/`, { validateStatus: () => true });
+
+  if (res.status === 200) {
+    return res.data;
   }
   return null;
 };

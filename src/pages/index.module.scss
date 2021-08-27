@@ -22,9 +22,27 @@
     height: 70vh;
     max-height: 400px;
     padding: 0 40px;
+
     embed {
       height: 100%;
       width: 100%;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    font-family: "gopher";
+    color: $ivory;
+
+    a {
+      color: $ivory;
+      text-decoration: none;
+    }
+
+    .myOrder {
+      margin: 8px;
     }
   }
 
