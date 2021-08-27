@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./[id].module.scss";
+import colors from "@styles/colors.module.scss";
 import { categoryOptions, donation, options as optionsMap, products } from "@src/utils/store";
 import Main from "@src/components/templates/Main";
 import HeaderLayout from "@src/components/templates/HeaderLayout";
@@ -15,17 +16,23 @@ import { validateOrderer } from "@src/utils/validate";
 import { OrdererError } from "@src/types/order";
 import { Button } from "@src/components/atoms/Button";
 import { addComma } from "@src/utils/math";
+import { IoIosPhotos } from "react-icons/io";
 
 export default function ProductDetail(props: { id: number }) {
+  const imageContainer = useRef<HTMLDivElement>();
+
   const product = products.filter((product) => product.id == props.id)[0];
   const optionKeys = product
     ? product.category.map((category) => categoryOptions[category].map((option) => optionsMap[option].label)).flat()
     : [];
   const nonOption = optionKeys.length == 0;
   const initialOptions = Object.fromEntries(new Map(optionKeys.map((key) => [key, ""])));
+
   const [options, setOptions] = useState(initialOptions);
   const [ordererError, setOrdererError] = useState<OrdererError>({});
   const [agree, setAgree] = useState<boolean>(false);
+  const [scroll, setScroll] = useState<number>(0);
+  const [imageIndex, setImageIndex] = useState<number>(0);
 
   const [orderer, setOrderer] = useOrderer();
   const [orders, setOrders] = useOrders();
@@ -77,6 +84,10 @@ export default function ProductDetail(props: { id: number }) {
     }
   }, [options]);
 
+  useEffect(() => {
+    setImageIndex(Math.round(scroll / imageContainer.current.clientWidth));
+  }, [scroll]);
+
   const handleDone = () => {
     if (orders.length <= 0) {
       alert("옵션을 선택해주세요.");
@@ -99,12 +110,18 @@ export default function ProductDetail(props: { id: number }) {
     <Main>
       <HeaderLayout>
         <div className={styles.title}>{product?.name}</div>
-        <div className={styles.image}>
+        <div className={styles.image} onScroll={(e) => setScroll(e.currentTarget.scrollLeft)} ref={imageContainer}>
           {product?.images.map((image) => (
             <div key={image}>
               <img src={image} />
             </div>
           ))}
+        </div>
+        <div className={styles.imageIndex}>
+          <div>
+            {imageIndex + 1}/{product?.images.length}
+          </div>
+          <IoIosPhotos color={colors.black} />
         </div>
         <div className={styles.price}>
           {product?.orignalPrice && <div className={styles.original}>₩{addComma(product?.orignalPrice || 0)}</div>}₩

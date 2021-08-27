@@ -25,6 +25,16 @@
   }
 }
 
+.imageIndex {
+  width: 100vw !important;
+  display: flex;
+  justify-content: flex-end;
+
+  & > * {
+    margin-right: 4px;
+  }
+}
+
 .price {
   font-family: "soap", "GmarketSansMedium";
   font-size: 1.2em;
