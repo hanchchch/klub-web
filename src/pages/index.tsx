@@ -33,10 +33,19 @@ export default function Index() {
           ))}
       </div>
       <div className={styles.notice}>
-        <div></div>
+        <div>
+          <div className={styles.title}>서버 지원</div>
+          <div className={styles.content}>
+            <a href="https://devkorops.notion.site/DevKor-4ad582d6659647edb9131625da3da387">
+              소프트웨어 개발 연구 학회 DevKor
+            </a>
+          </div>
+        </div>
         <div className={styles.right}>
           <div className={styles.title}>문의</div>
-          <div className={styles.content}>instagram @klub_project</div>
+          <div className={styles.content}>
+            <a href="https://www.instagram.com/klub_project/">instagram @klub_project</a>
+          </div>
         </div>
       </div>
     </Main>
