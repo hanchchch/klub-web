@@ -8,8 +8,8 @@ import router from "next/router";
 import HeaderLayout from "@src/components/templates/HeaderLayout";
 import { categoryOptions, deliveryCharge, options } from "@src/utils/store";
 import { Product } from "@src/types/product";
-import { sendSlackMessage } from "@src/utils/slack";
 import { Button } from "@src/components/atoms/Button";
+import { postOrder } from "@src/utils/api";
 
 export default function Payment() {
   const [orders] = useOrders();
@@ -95,7 +95,7 @@ export default function Payment() {
             if (!confirm("주문자/주문 정보가 정확한가요?")) return;
             if (!confirm("상단의 계좌로 주문 금액을 이체하셨나요?")) return;
             try {
-              const res = await sendSlackMessage(orderer, orders, price, optionKeys);
+              const res = await postOrder(orderer, orders, price, optionKeys);
               console.log(res);
               alert("주문이 완료되었습니다!");
               router.push("/");
