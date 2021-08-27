@@ -30,7 +30,7 @@ export const products: Product[] = [
   {
     id: 2,
     name: "Laptop Stickers",
-    price: 7900,
+    price: 5900,
     description:
       "무광 스티커 9종으로 구성된 KLUB의 오리지널 스티커 세트\n노트북, 핸드폰, 노트, 아이패드 등에\n붙이기 적당한 사이즈에요.\nKU의 무드로 주변을 꾸며보세요!",
     image: "/assets/images/sticker_1.jpeg",
@@ -40,7 +40,7 @@ export const products: Product[] = [
   {
     id: 3,
     name: "Tumbler",
-    price: 5900,
+    price: 7900,
     description:
       "카페, 학교 등에서 가볍게 쓰기 좋은 컴팩트한 사이즈에요.\n분리형 이중 구조로 되어있어 세척, 보온이 용이합니다.",
     image: "/assets/images/tumbler_4.jpeg",
