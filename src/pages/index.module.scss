@@ -68,12 +68,20 @@
   }
 }
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .notice {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   font-family: "gopher", "GmarketSansMedium";
   padding-bottom: 40px;
+  width: 100%;
+  max-width: 1200px;
 
   a {
     color: $black;
