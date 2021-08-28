@@ -18,7 +18,7 @@ import { Button } from "@src/components/atoms/Button";
 import { addComma } from "@src/utils/math";
 import { IoIosPhotos } from "react-icons/io";
 import { OptionValue, Product } from "@src/types/product";
-import { getProduct } from "@src/utils/api";
+import { getProduct, getQuantities } from "@src/utils/api";
 
 export default function ProductDetail(props: { id: number }) {
   const imageContainer = useRef<HTMLDivElement>();
@@ -72,16 +72,19 @@ export default function ProductDetail(props: { id: number }) {
     }
 
     let blank = false;
-    optionKeys.forEach((key) => {
-      if (options[key]?.id === -1) blank = true;
+    const optionsArray = optionKeys.map((key) => options[key]);
+    optionsArray.forEach((option) => {
+      if (option.id == -1) {
+        blank = true;
+      }
     });
 
     if (!blank) {
       let isSameExists = false;
       orders.forEach((order) => {
         let same = true;
-        optionKeys.forEach((key) => {
-          if (!order.options?.includes(options[key])) same = false;
+        optionsArray.forEach((option) => {
+          if (!order.options?.includes(option)) same = false;
         });
         if (same) isSameExists = true;
       });
@@ -89,14 +92,36 @@ export default function ProductDetail(props: { id: number }) {
       setOptions(getInitOptions(optionKeys));
 
       if (isSameExists) return;
-      setOrders([
-        ...orders,
-        {
-          product,
-          options: optionKeys.map((key) => options[key]),
-          quantity: 1,
-        },
-      ]);
+      getQuantities([...optionsArray, ...product.fixed_options], product.is_set).then((quantities) => {
+        console.log(quantities.map((q) => q.quantity));
+        let available = true;
+
+        if (quantities.length == 0) {
+          alert("Something went wrong");
+          return;
+        }
+
+        quantities.forEach((q) => {
+          if (q.quantity <= 0) {
+            alert(`${optionsArray.map((o) => o.value).join(" / ")} 재고가 부족합니다.`);
+            available = false;
+          }
+        });
+
+        setOrders(
+          available
+            ? [
+              ...orders,
+              {
+                product,
+                options: optionsArray,
+                quantity: 1,
+                remaining: Math.min(...quantities.map((q) => q.quantity)),
+              },
+            ]
+            : orders
+        );
+      });
     }
   }, [options]);
 
@@ -168,6 +193,7 @@ export default function ProductDetail(props: { id: number }) {
                 value={order.quantity}
                 onChange={(v) => {
                   if (v < 1) return;
+                  if (v > order.remaining) return;
                   const oldOrders = orders;
                   oldOrders[index].quantity = v;
                   setOrders(oldOrders);
