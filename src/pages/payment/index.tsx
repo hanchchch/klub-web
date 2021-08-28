@@ -16,8 +16,6 @@ export default function Payment() {
 
   const [price, setPrice] = useState<number>(0);
 
-  const optionKeys = () => orders.map((o) => o.product.options.map((option) => option.name)).flat();
-
   useEffect(() => {
     setPrice(orders.map((o) => o.product.price * o.quantity).reduce((a, b) => a + b, 0));
   }, [orders]);
@@ -89,12 +87,7 @@ export default function Payment() {
             if (!confirm("주문자/주문 정보가 정확한가요?")) return;
             if (!confirm("상단의 계좌로 주문 금액을 이체하셨나요?")) return;
             try {
-              const res = await postOrder(
-                orderer,
-                orders,
-                price + (orderer.isShipping ? deliveryCharge : 0),
-                optionKeys
-              );
+              const res = await postOrder(orderer, orders, price + (orderer.isShipping ? deliveryCharge : 0));
               console.log(res);
               alert("주문이 완료되었습니다!");
               router.push("/");

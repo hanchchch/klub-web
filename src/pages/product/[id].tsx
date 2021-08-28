@@ -153,7 +153,7 @@ export default function ProductDetail(props: { id: number }) {
               { label: "Select", value: -1 },
               ...option.values.map((value) => ({ label: value.value, value: value.id })),
             ]}
-            value={options[option.name].id}
+            value={options[option.name]?.id || -1}
             onChange={(id) =>
               setOptions((pre) => ({ ...pre, [option.name]: option.values.filter((v) => v.id == id)[0] }))
             }
