@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./index.module.scss";
 import Link from "next/link";
 import Main from "@src/components/templates/Main";
 import ProductCard from "@src/components/molecules/ProductCard";
-import { products } from "@src/utils/store";
 import { Product } from "@src/types/product";
 import useView from "@src/utils/hooks/view";
+import { useEffect } from "react";
+import { listProducts } from "@src/utils/api";
 
 export default function Index() {
+  const [products, setProducts] = useState<Product[]>([]);
   const [show, setShow] = useView();
-  const isSet = (p: Product) => p.category.length > 1;
+
+  useEffect(() => {
+    listProducts().then((products) => setProducts(products));
+  }, []);
 
   return (
     <Main>
@@ -35,7 +40,7 @@ export default function Index() {
       </div>
       <div className={styles.container}>
         {products
-          .filter((product) => (show === "all" ? !isSet(product) : isSet(product)))
+          .filter((product) => (show === "all" ? !product.is_set : product.is_set))
           .map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

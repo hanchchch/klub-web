@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./[id].module.scss";
 import colors from "@styles/colors.module.scss";
-import { categoryOptions, donation, options as optionsMap, products } from "@src/utils/store";
+import { donation } from "@src/utils/store";
 import Main from "@src/components/templates/Main";
 import HeaderLayout from "@src/components/templates/HeaderLayout";
 import Dropdown from "@src/components/atoms/Dropdown";
@@ -17,18 +17,23 @@ import { OrdererError } from "@src/types/order";
 import { Button } from "@src/components/atoms/Button";
 import { addComma } from "@src/utils/math";
 import { IoIosPhotos } from "react-icons/io";
+import { OptionValue, Product } from "@src/types/product";
+import { getProduct, getQuantities } from "@src/utils/api";
 
 export default function ProductDetail(props: { id: number }) {
   const imageContainer = useRef<HTMLDivElement>();
 
-  const product = products.filter((product) => product.id == props.id)[0];
-  const optionKeys = product
-    ? product.category.map((category) => categoryOptions[category].map((option) => optionsMap[option].label)).flat()
-    : [];
-  const nonOption = optionKeys.length == 0;
-  const initialOptions = Object.fromEntries(new Map(optionKeys.map((key) => [key, ""])));
+  // const product = products.filter((product) => product.id == props.id)[0];
+  // const optionKeys = product
+  //   ? product.category.map((category) => categoryOptions[category].map((option) => optionsMap[option].label)).flat()
+  //   : [];
+  // const nonOption = optionKeys.length == 0;
+  // const initialOptions = Object.fromEntries(new Map(optionKeys.map((key) => [key, ""])));
+  const [product, setProduct] = useState<Product>();
 
-  const [options, setOptions] = useState(initialOptions);
+  const [optionKeys, setOptionKeys] = useState<string[]>([]);
+  const [options, setOptions] = useState<{ [k: string]: OptionValue }>({});
+
   const [ordererError, setOrdererError] = useState<OrdererError>({});
   const [agree, setAgree] = useState<boolean>(false);
   const [scroll, setScroll] = useState<number>(0);
@@ -37,50 +42,86 @@ export default function ProductDetail(props: { id: number }) {
   const [orderer, setOrderer] = useOrderer();
   const [orders, setOrders] = useOrders();
 
+  const getInitOptions = (keys: string[]) =>
+    Object.fromEntries(new Map(keys.map((key) => [key, { id: -1, value: "" }])));
+
   useEffect(() => {
+    getProduct(props.id).then((product) => setProduct(product));
     setOrders([]);
   }, []);
 
   useEffect(() => {
-    if (nonOption) {
+    if (product) {
+      const keys = product.options.map((option) => option.name);
+      setOptionKeys(keys);
+      setOptions(getInitOptions(keys));
+    }
+  }, [product]);
+
+  useEffect(() => {
+    if (!product) return;
+    if (optionKeys.length == 0) {
       setOrders([
         {
           product,
-          options: {
-            quantity: 1,
-          },
+          options: product.fixed_options,
+          quantity: 1,
         },
       ]);
       return;
     }
 
     let blank = false;
-    optionKeys.forEach((key) => {
-      if (options[key] === "") blank = true;
+    const optionsArray = optionKeys.map((key) => options[key]);
+    optionsArray.forEach((option) => {
+      if (option.id == -1) {
+        blank = true;
+      }
     });
+
     if (!blank) {
       let isSameExists = false;
       orders.forEach((order) => {
         let same = true;
-        optionKeys.forEach((key) => {
-          if (order.options[key] !== options[key]) same = false;
+        optionsArray.forEach((option) => {
+          if (!order.options?.includes(option)) same = false;
         });
         if (same) isSameExists = true;
       });
 
-      setOptions(initialOptions);
+      setOptions(getInitOptions(optionKeys));
 
       if (isSameExists) return;
-      setOrders([
-        ...orders,
-        {
-          product,
-          options: {
-            ...options,
-            quantity: 1,
-          },
-        },
-      ]);
+      getQuantities([...optionsArray, ...product.fixed_options], product.is_set).then((quantities) => {
+        console.log(quantities.map((q) => q.quantity));
+        let available = true;
+
+        if (quantities.length == 0) {
+          alert("Something went wrong");
+          return;
+        }
+
+        quantities.forEach((q) => {
+          if (q.quantity <= 0) {
+            alert(`${optionsArray.map((o) => o.value).join(" / ")} 재고가 부족합니다.`);
+            available = false;
+          }
+        });
+
+        setOrders(
+          available
+            ? [
+              ...orders,
+              {
+                product,
+                options: optionsArray,
+                quantity: 1,
+                remaining: Math.min(...quantities.map((q) => q.quantity)),
+              },
+            ]
+            : orders
+        );
+      });
     }
   }, [options]);
 
@@ -112,8 +153,8 @@ export default function ProductDetail(props: { id: number }) {
         <div className={styles.title}>{product?.name}</div>
         <div className={styles.image} onScroll={(e) => setScroll(e.currentTarget.scrollLeft)} ref={imageContainer}>
           {product?.images.map((image) => (
-            <div key={image}>
-              <img src={image} />
+            <div key={image.image}>
+              <img src={image.image} />
             </div>
           ))}
         </div>
@@ -124,41 +165,43 @@ export default function ProductDetail(props: { id: number }) {
           <IoIosPhotos color={colors.black} />
         </div>
         <div className={styles.price}>
-          {product?.orignalPrice && <div className={styles.original}>₩{addComma(product?.orignalPrice || 0)}</div>}₩
-          {addComma(product?.price || 0)}
+          {product?.original_price != 0 && (
+            <div className={styles.original}>₩{addComma(product?.original_price || 0)}</div>
+          )}
+          ₩{addComma(product?.price || 0)}
         </div>
         <div className={styles.description}>{product?.description}</div>
         <Ellipse text={"ORDER NOW"} />
-        {product?.category.map((category) =>
-          categoryOptions[category].map((option) => {
-            const label = optionsMap[option].label;
-            const values = optionsMap[option].values;
-            return (
-              <Dropdown
-                key={option}
-                label={label}
-                options={[{ label: "Select", value: "" }, ...values.map((value) => ({ label: value, value: value }))]}
-                value={options[label]}
-                onChange={(value) => setOptions((pre) => ({ ...pre, [label]: value as string }))}
-              />
-            );
-          })
-        )}
+        {product?.options.map((option) => (
+          <Dropdown
+            key={option.name}
+            label={option.name}
+            options={[
+              { label: "Select", value: -1 },
+              ...option.values.map((value) => ({ label: value.value, value: value.id })),
+            ]}
+            value={options[option.name]?.id || -1}
+            onChange={(id) =>
+              setOptions((pre) => ({ ...pre, [option.name]: option.values.filter((v) => v.id == id)[0] }))
+            }
+          />
+        ))}
         <hr />
         {orders.map((order, index) => (
           <div className={styles.order} key={index}>
-            <div>{!nonOption ? optionKeys.map((key) => order.options[key]).join(" / ") : "수량"}</div>
+            <div>{optionKeys.length != 0 ? order.options?.map((option) => option.value).join(" / ") : "수량"}</div>
             <div className={styles.control}>
               <NumberInput
-                value={order.options.quantity}
+                value={order.quantity}
                 onChange={(v) => {
                   if (v < 1) return;
+                  if (v > order.remaining) return;
                   const oldOrders = orders;
-                  oldOrders[index].options.quantity = v;
+                  oldOrders[index].quantity = v;
                   setOrders(oldOrders);
                 }}
               />
-              {!nonOption && (
+              {optionKeys.length != 0 && (
                 <BiX
                   className={styles.cancel}
                   onClick={() => {

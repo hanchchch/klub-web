@@ -39,8 +39,8 @@ export default function MyPage() {
           <table>
             <tbody>
               {info.orders.map((o) => (
-                <tr key={o.order}>
-                  <td>{o.order}</td>
+                <tr key={o.summary}>
+                  <td>{o.summary}</td>
                   <td>₩{addComma(o.total)}</td>
                 </tr>
               ))}
