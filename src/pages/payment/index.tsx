@@ -6,8 +6,7 @@ import useOrders from "@src/utils/hooks/order";
 import { Ellipse } from "@src/components/atoms/Ellipse";
 import router from "next/router";
 import HeaderLayout from "@src/components/templates/HeaderLayout";
-import { categoryOptions, deliveryCharge, options } from "@src/utils/store";
-import { Product } from "@src/types/product";
+import { deliveryCharge } from "@src/utils/store";
 import { Button } from "@src/components/atoms/Button";
 import { postOrder } from "@src/utils/api";
 
@@ -17,11 +16,10 @@ export default function Payment() {
 
   const [price, setPrice] = useState<number>(0);
 
-  const optionKeys = (product: Product) =>
-    product.category.map((category) => categoryOptions[category].map((option) => options[option].label)).flat();
+  const optionKeys = () => orders.map((o) => o.product.options.map((option) => option.name)).flat();
 
   useEffect(() => {
-    setPrice(orders.map((o) => o.product.price * o.options.quantity).reduce((a, b) => a + b, 0));
+    setPrice(orders.map((o) => o.product.price * o.quantity).reduce((a, b) => a + b, 0));
   }, [orders]);
 
   return (
@@ -51,13 +49,9 @@ export default function Payment() {
             {orders.map((o) => (
               <tr key={o.product.name}>
                 <td>{o.product.name}</td>
+                <td>{o.options.map((option) => option.value).join(" / ")}</td>
                 <td>
-                  {optionKeys(o.product)
-                    .map((k) => o.options[k])
-                    .join(" / ")}
-                </td>
-                <td>
-                  ₩{o.product.price}*{o.options.quantity}
+                  ₩{o.product.price}*{o.quantity}
                 </td>
               </tr>
             ))}

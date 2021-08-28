@@ -1,4 +1,4 @@
-import { Product } from "./product";
+import { OptionValue, Product } from "./product";
 
 export interface Orderer {
   name: string;
@@ -10,10 +10,8 @@ export interface Orderer {
 
 export interface Order {
   product: Product;
-  options: {
-    [key: string]: string | number;
-    quantity: number;
-  };
+  options: OptionValue[];
+  quantity: number;
 }
 
 export type OrdererError = Partial<{ name: string; phone: string; address: string; donation: string }>;

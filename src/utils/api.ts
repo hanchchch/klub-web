@@ -48,3 +48,21 @@ export const getOrderer = async (phone: string) => {
   }
   return null;
 };
+
+export const listProducts = async () => {
+  const res = await axios.get<Product[]>("/api/product/product", { validateStatus: () => true });
+
+  if (res.status === 200) {
+    return res.data;
+  }
+  return null;
+};
+
+export const getProduct = async (id: number) => {
+  const res = await axios.get<Product>(`/api/product/product/${id}/`, { validateStatus: () => true });
+
+  if (res.status === 200) {
+    return res.data;
+  }
+  return null;
+};
