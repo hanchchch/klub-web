@@ -165,8 +165,10 @@ export default function ProductDetail(props: { id: number }) {
           <IoIosPhotos color={colors.black} />
         </div>
         <div className={styles.price}>
-          {/* {product?.orignalPrice && <div className={styles.original}>₩{addComma(product?.orignalPrice || 0)}</div>}₩ */}
-          {addComma(product?.price || 0)}
+          {product?.original_price != 0 && (
+            <div className={styles.original}>₩{addComma(product?.original_price || 0)}</div>
+          )}
+          ₩{addComma(product?.price || 0)}
         </div>
         <div className={styles.description}>{product?.description}</div>
         <Ellipse text={"ORDER NOW"} />

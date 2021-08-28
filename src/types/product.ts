@@ -3,17 +3,6 @@ export type ProductCategory = "shirt" | "sticker" | "tumbler" | "shirtSet";
 export type Size = "M" | "L" | "XL";
 export type Color = "White" | "Black" | "Pink";
 
-// export interface Product {
-//   id: number;
-//   name: string;
-//   orignalPrice?: number;
-//   price: number;
-//   description?: string;
-//   image: string;
-//   images: string[];
-//   category: ProductCategory[];
-// }
-
 export type OptionValue = {
   id: number;
   value: string;
@@ -28,6 +17,7 @@ export interface Product {
   id: number;
   name: string;
   description: string;
+  original_price?: number;
   price: number;
   is_set: boolean;
   images: { image: string; is_main: boolean }[];
