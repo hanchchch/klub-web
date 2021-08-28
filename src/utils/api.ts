@@ -30,8 +30,8 @@ export const postOrder = async (orderer: Orderer, orders: Order[], total: number
     }
 
     const resOrder = await axios.post("/api/order/order/", {
-      summary: `\n>*${order.product.name}* (${order.product.options
-        .map((o) => o.values.map((v) => v.value))
+      summary: `\n>*${order.product.name}* (${order.options
+        .map((v) => v.value)
         .flat()
         .join(" / ")}) ${order.quantity}개`,
       quantity: order.quantity,
