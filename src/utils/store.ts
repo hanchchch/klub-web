@@ -107,7 +107,7 @@ export const options: { [key: string]: { label: string; values: string[] } } = {
   },
   tumblerColor: {
     label: "Tumbler Color / 텀블러 색상",
-    values: ["Black", "Pink"],
+    values: ["Black"],
   },
 };
 
